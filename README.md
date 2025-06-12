@@ -9,8 +9,9 @@
 | 여러 키워드가 한 줄로 나옴 | “Each keyword on a separate line” 추가 |
 | 원문 단어 아닌 표현 등장  | “Only use words from input text” 명시  |
 
-### examples
+### ✏️ examples
 | harmful effects on the environment |
+| ------------------------ |
 | 환경에 미치는 해로운 영향 |
 | ------------------------ |
 | keyword1 | harmful effects | 해로운 영향 |
