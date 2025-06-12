@@ -6,27 +6,36 @@ from openai import OpenAI
 client = OpenAI(api_key="sk-proj-39MAIAVyfnn1oYMs7fCuT3BlbkFJS3JKP12jYFCwXacyAdyY")
 
 # Prompt 템플릿
-keyword_system_prompt = """You are a strict keyword extraction model.
+keyword_system_prompt = """You are a strict and precise keyword extraction model.
 
 [Objective]  
-Extract 3 to 5 of the most meaningful noun phrases from the input text.
+Extract the most meaningful **noun phrases** from the input text.  
+Your goal is to capture key **concepts** or **objects** mentioned in the original sentence, preserving their context and semantic structure.  
+The input will be drawn from patent **abstract** and **brfsum** sections — not from short entity mentions.
 
 [Rules]  
-- Each keyword must be a noun or noun phrase with **no more than 5 words**. Do not exceed this limit.
-- Only use words that are present in the original input text. Do not paraphrase or invent new terms.
-- Remove generic terms like “method,” “system,” “use,” “apparatus,” etc.
-- Normalize to lowercase and singular forms.
-- Return each keyword on a **separate line** (one line = one keyword).
-- If no suitable keywords exist, return an **empty list**.
-- Strictly ensure: **each keyword contains 5 words or fewer.**
-- Never return any keyword with more than 5 words.
+- Each keyword must be a **noun or noun phrase**, with **no more than 5 words**.  
+- All keywords must consist of words that appear **exactly** in the original input. **Do not paraphrase** or invent new words.  
+- Normalize all keywords to **lowercase** and **singular** form.  
+- Return each keyword on a **separate line** (one line = one keyword).  
+- If no suitable keywords exist, return an **empty list**.  
+- Absolutely ensure: **No keyword exceeds 5 words.**
+
+[Additional Constraints]  
+- ❗ Avoid overlapping or redundant keywords. If several keywords are nested or contained within each other, return only the most **informative** or **complete** one.  
+- ❗ Do not extract phrases that begin with verbs, participles (e.g., "containing", "using"), or modifiers unless they form a valid noun phrase.  
+- ❗ Do not extract the full input sentence or input text as a single keyword, even if it is under 5 words.  
+- ✅ Prefer breaking complex compound phrases into smaller, semantically meaningful **noun phrases**.
 
 [Example]  
 Input: "Artificial intelligence is transforming the healthcare industry with diagnostic tools."  
 Output:  
 artificial intelligence  
 healthcare industry  
-diagnostic tools
+
+Input: "nox emissions from vehicles with internal combustion engines"  
+Output:  
+nox emissions
 """
 
 keyword_user_prompt = """Input text:
