@@ -6,20 +6,27 @@ from openai import OpenAI
 client = OpenAI(api_key="sk-proj-39MAIAVyfnn1oYMs7fCuT3BlbkFJS3JKP12jYFCwXacyAdyY")
 
 # Prompt 템플릿
-keyword_system_prompt = """You are a keyword extraction model.
+keyword_system_prompt = """You are a strict keyword extraction model.
 
-[Objective]
-Extract the 3 to 5 most important noun-based keywords from a given text.
+[Objective]  
+Extract 3 to 5 of the most meaningful noun phrases from the input text.
 
-[Task Instructions]
-- Only extract nouns or noun phrases that capture the core concepts.
-- Output as a **comma-separated list**.
-- Do not include any explanations or sentences.
-- If no valid keywords, output an empty list.
+[Rules]  
+- Each keyword must be a noun or noun phrase with **no more than 5 words**. Do not exceed this limit.
+- Only use words that are present in the original input text. Do not paraphrase or invent new terms.
+- Remove generic terms like “method,” “system,” “use,” “apparatus,” etc.
+- Normalize to lowercase and singular forms.
+- Return each keyword on a **separate line** (one line = one keyword).
+- If no suitable keywords exist, return an **empty list**.
+- Strictly ensure: **each keyword contains 5 words or fewer.**
+- Never return any keyword with more than 5 words.
 
-[Format Example]
-Input: "Artificial intelligence is transforming the healthcare industry with diagnostic tools."
-Output: artificial intelligence, healthcare industry, diagnostic tools
+[Example]  
+Input: "Artificial intelligence is transforming the healthcare industry with diagnostic tools."  
+Output:  
+artificial intelligence  
+healthcare industry  
+diagnostic tools
 """
 
 keyword_user_prompt = """Input text:
@@ -47,13 +54,14 @@ def extract_keywords(entity_text):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4.1-mini",   # gpt-4o 사용 추천
+            model="gpt-4.1-mini",
             messages=messages,
-            temperature=0.3
+            temperature=0.0
         )
         content = response.choices[0].message.content.strip()
-        keywords = [kw.strip() for kw in content.split(",") if kw.strip()]
-        
+
+        keywords = [kw.strip() for kw in content.splitlines() if kw.strip()]
+
         cost = calculate_cost_of_openai_api(response.usage.prompt_tokens, response.usage.completion_tokens)
 
         return keywords, cost
@@ -61,9 +69,6 @@ def extract_keywords(entity_text):
         print(f"Error extracting keywords: {e}")
         return [], 0.0
 
-# 키워드 포함 여부 확인
-def keyword_in_text(keywords, text):
-    return [kw for kw in keywords if kw.lower() in text.lower()]
 
 # Main 처리
 def main():
@@ -77,26 +82,23 @@ def main():
 
     for _, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
         entity = row['entity_text']
-        abstract = str(row.get('abstract', ''))
-        brfsum = str(row.get('brfsum', ''))
 
         keywords, cost = extract_keywords(entity)
         total_cost += cost
 
-        in_abstract = keyword_in_text(keywords, abstract)
-        in_brfsum = keyword_in_text(keywords, brfsum)
+        # 결과 dict 구성 (각 키워드를 별도 칼럼에 저장)
+        result_row = {"entity_text": entity}
+        for i, kw in enumerate(keywords):
+            result_row[f"keyword_{i+1}"] = kw
 
-        results.append({
-            "entity_text": entity,
-            "keywords": ", ".join(keywords),
-            "keywords_in_abstract": ", ".join(in_abstract),
-            "keywords_in_brfsum": ", ".join(in_brfsum)
-        })
+        results.append(result_row)
 
-    # 결과 저장
+    # 결과 DataFrame 생성
     results_df = pd.DataFrame(results)
+
+    # 결과 저장 (CSV 혹은 XLSX 중 선택)
     output_path = "C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/keyword_analysis_results.csv"
-    results_df.to_csv(output_path, index=False)
+    results_df.to_csv(output_path, index=False, encoding="utf-8-sig")  # 한글 깨짐 방지
 
     print(f"Keyword extraction complete. Result saved as '{output_path}'")
     print(f"Total API cost: ${total_cost:.6f}")
