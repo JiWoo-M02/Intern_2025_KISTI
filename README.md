@@ -10,11 +10,11 @@
 | 원문 단어 아닌 표현 등장  | “Only use words from input text” 명시  |
 
 ### examples
-harmful effects on the environment
-환경에 미치는 해로운 영향
-
-keyword1 : harmful effects 해로운 영행
-keyword2 : environment 환경
+| harmful effects on the environment |
+| 환경에 미치는 해로운 영향 |
+| ------------------------ |
+| keyword1 | harmful effects | 해로운 영향 |
+| keyword2 | environment | 환경 |
 
 
 
