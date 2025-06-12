@@ -14,12 +14,16 @@
 ### ✏️ examples
 ex1. harmful effects on the environment
 <br>환경에 미치는 해로운 영향
+| keyword  | eng | kor |
+| -------- | --- | --- |
 | keyword1 | harmful effects | 해로운 영향 |
 | keyword2 | environment | 환경 |
 <br>
 
 ex2. clogging of the pores by soot
 <br>그을음으로 인한 모공 막힘
+| keyword  | eng | kor |
+| -------- | --- | --- |
 | keyword1 | clogging | 막힘 |
 | keyword2 | pores | 모공 |
 | keyword3 | soot | 그을음 |
