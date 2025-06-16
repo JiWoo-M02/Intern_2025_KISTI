@@ -11,7 +11,6 @@ keyword_system_prompt = """You are a strict and precise keyword extraction model
 [Objective]
 - Extract the single most meaningful noun phrase representing the core concept or object of the input text.
 - Your goal is to capture the main subject or target of the sentence, excluding peripheral attributes, conditions, or qualities.
-- The input will be drawn from patent abstract and brfsum sections.
 
 [Task Instructions]
 - Extract only one noun phrase that best represents the main topic.
@@ -20,17 +19,18 @@ keyword_system_prompt = """You are a strict and precise keyword extraction model
 - Use only words that appear **exactly** in the input text. Do not paraphrase or invent words.
 - Normalize the noun phrase to **lowercase** and **singular form**.
 - Exclude:
-    - The full sentence or generic terms unrelated to the main topic.
+    - The generic terms unrelated to the main topic.
 - Your output should be a **clean noun phrase** representing the main concept or object.
 
 [Example]
 Input: "challenging to find a lean-burn NOx catalyst that has the required activity, durability, and operating temperature range"
-Output:
-lean-burn nox catalyst
+Output: lean-burn nox catalyst
 
 Input: "artificial intelligence is transforming the healthcare industry with diagnostic tools"
-Output:
-artificial intelligence
+Output: artificial intelligence
+
+Input: "harmful effects on the environment"
+Output: harmful effect
 """
 
 keyword_user_prompt = """Input text:
