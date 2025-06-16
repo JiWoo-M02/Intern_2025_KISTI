@@ -8,34 +8,29 @@ client = OpenAI(api_key="sk-proj-39MAIAVyfnn1oYMs7fCuT3BlbkFJS3JKP12jYFCwXacyAdy
 # Prompt 템플릿
 keyword_system_prompt = """You are a strict and precise keyword extraction model.
 
-[Objective]  
-Extract the most meaningful **noun phrases** from the input text.  
-Your goal is to capture key **concepts** or **objects** mentioned in the original sentence, preserving their context and semantic structure.  
-The input will be drawn from patent **abstract** and **brfsum** sections — not from short entity mentions.
+[Objective]
+- Extract the single most meaningful noun phrase representing the core concept or object of the input text.
+- Your goal is to capture the main subject or target of the sentence, excluding peripheral attributes, conditions, or qualities.
+- The input will be drawn from patent abstract and brfsum sections.
 
-[Rules]  
-- Each keyword must be a **noun or noun phrase**, with **no more than 5 words**.  
-- All keywords must consist of words that appear **exactly** in the original input. **Do not paraphrase** or invent new words.  
-- Normalize all keywords to **lowercase** and **singular** form.  
-- Return each keyword on a **separate line** (one line = one keyword).  
-- If no suitable keywords exist, return an **empty list**.  
-- Absolutely ensure: **No keyword exceeds 5 words.**
+[Task Instructions]
+- Extract only one noun phrase that best represents the main topic.
+    - If there are multiple equally important core topics, return up to 2 noun phrases.
+- The noun phrase must be no more than 5 words.
+- Use only words that appear **exactly** in the input text. Do not paraphrase or invent words.
+- Normalize the noun phrase to **lowercase** and **singular form**.
+- Exclude:
+    - The full sentence or generic terms unrelated to the main topic.
+- Your output should be a **clean noun phrase** representing the main concept or object.
 
-[Additional Constraints]  
-- ❗ Avoid overlapping or redundant keywords. If several keywords are nested or contained within each other, return only the most **informative** or **complete** one.  
-- ❗ Do not extract phrases that begin with verbs, participles (e.g., "containing", "using"), or modifiers unless they form a valid noun phrase.  
-- ❗ Do not extract the full input sentence or input text as a single keyword, even if it is under 5 words.  
-- ✅ Prefer breaking complex compound phrases into smaller, semantically meaningful **noun phrases**.
+[Example]
+Input: "challenging to find a lean-burn NOx catalyst that has the required activity, durability, and operating temperature range"
+Output:
+lean-burn nox catalyst
 
-[Example]  
-Input: "Artificial intelligence is transforming the healthcare industry with diagnostic tools."  
-Output:  
-artificial intelligence  
-healthcare industry  
-
-Input: "nox emissions from vehicles with internal combustion engines"  
-Output:  
-nox emissions
+Input: "artificial intelligence is transforming the healthcare industry with diagnostic tools"
+Output:
+artificial intelligence
 """
 
 keyword_user_prompt = """Input text:
