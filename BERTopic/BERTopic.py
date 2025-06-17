@@ -15,7 +15,7 @@ kw_model = KeyBERT(model="all-MiniLM-L6-v2")
 
 # 3. entity_text → 핵심 키워드만 추출 (top 3 단어)
 def extract_keywords(text):
-    keywords = kw_model.extract_keywords(str(text), keyphrase_ngram_range=(1, 1), stop_words='english', top_n=3)
+    keywords = kw_model.extract_keywords(str(text), keyphrase_ngram_range=(1, 1), stop_words='english', top_n=5)
     return " ".join([kw for kw, _ in keywords])
 
 # 핵심 키워드 문서 리스트 생성
@@ -61,3 +61,4 @@ topic_model.visualize_topics()
 df['topic'] = topics
 df.to_csv("entity_topics_keybert.csv", index=False)
 topic_model.save("C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model")
+

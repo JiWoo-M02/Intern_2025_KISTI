@@ -66,3 +66,23 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 5        | 20   | vehicles, automobiles, military, equipment       | 차량/군용 장비 관련 문서 (배기 관련보다 차량 자체에 초점)       |
 | 6        | 14   | ammonia, infrastructure, release, precursor      | 암모니아 기반 배출 시스템 및 인프라 구축 논의               |
 | 7        | 13   | manufacturers, researchers, commercially         | 제조사/연구자 중심의 연구 동향 또는 기술 상용화 문서           |
+
+<br>
+<br>NO.4. top_n=5
+<br>
+
+| 토픽 번호  | 문서 수 | 대표 키워드                    | 주제                         |
+| -- | ---- | --------------------------------------- | ------------------------------- |
+| -1 | 96   | soot, carbon, denitration, regeneration | 탈질·탄소 관련 문서 중 노이즈 처리된 문서들   |
+| 0  | 69   | filter, particulate, honeycomb, ceramic | DPF/미세먼지 필터링 및 허니컴 세라믹 구조   |
+| 1  | 60   | exhaust, gas, temperature, flow         | 배기 가스 온도·유량 제어 및 정화 장치      |
+| 2  | 47   | nox, reduction, adsorber, emissions     | 질소산화물(NOx) 흡착·저감 시스템        |
+| 3  | 39   | catalyst, oxidation, deterioration      | 산화 촉매 및 열화 현상               |
+| 4  | 33   | engine, fuel, diesel, lean              | 연료소모, 디젤엔진, 희박연소(lean burn) |
+| 5  | 30   | effects, harmful, environmental         | 환경유해성 및 공해 영향 분석            |
+| 6  | 30   | sulfur, hydrogen, sulfide, removal      | 황 제거 및 황화수소 처리 단계           |
+| 7  | 20   | nitrogen, oxides, gases, reduction      | 질소산화물 제거/환원 (SCR 포함 가능)     |
+| 8  | 19   | vehicles, automobiles, owner, military  | 차량 및 군수 장비 관련 문서            |
+| 9  | 19   | internal, combustion, engine            | 내연기관 기술 및 연소 원리             |
+| 10 | 16   | manufacturers, researchers, commercial  | 산업계 및 연구기관 관련 기술 동향      |
+| 11 | 13   | ammonia, infrastructure, distribution   | 암모니아 기반 연료 인프라 및 배포 문제     |
