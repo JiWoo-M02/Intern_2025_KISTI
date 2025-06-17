@@ -50,8 +50,6 @@ topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 7. 결과 확인 및 저장
 print(topic_model.get_topic_info())
-print("\n[Topic 0 키워드]")
-print(topic_model.get_topic(0))
 
 # 8. 결과 시각화
 pio.renderers.default = 'browser'
