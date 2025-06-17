@@ -1,27 +1,21 @@
-# %% 전체 파이프라인
+# %%
 from bertopic import BERTopic
-from keybert import KeyBERT
 import pandas as pd
 import umap
 import hdbscan
-import plotly.io as pio
+import spacy
 
-# 1. CSV 파일 불러오기
-file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\overlapped_entities.csv"
-df = pd.read_csv(file_path, encoding = "windows-1252")
+# 1. CSV 데이터 불러오기
+file_path = "C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/overlapped_entities.csv"
+df = pd.read_csv(file_path, encoding="windows-1252")
 
-# 2. KeyBERT 모델 로딩 (같은 sentence-transformers 기반)
-kw_model = KeyBERT(model="all-MiniLM-L6-v2")
+# 2. entity_text 컬럼 추출
+docs = df['entity_text'].astype(str).tolist()
 
-# 3. entity_text → 핵심 키워드만 추출 (top 3 단어)
-def extract_keywords(text):
-    keywords = kw_model.extract_keywords(str(text), keyphrase_ngram_range=(1, 1), stop_words='english', top_n=5)
-    return " ".join([kw for kw, _ in keywords])
+# 3. (선택) 형태소 분석기 로딩 (영어 기준)
+nlp = spacy.load("en_core_web_lg")
 
-# 핵심 키워드 문서 리스트 생성
-reduced_docs = df['entity_text'].astype(str).apply(extract_keywords).tolist()
-
-# 4. 차원축소 + 클러스터링 모델 정의
+# 4. UMAP + HDBSCAN 모델 정의
 umap_model = umap.UMAP(
     n_neighbors=15, 
     n_components=5, 
@@ -31,32 +25,52 @@ umap_model = umap.UMAP(
 hdbscan_model = hdbscan.HDBSCAN(
     min_cluster_size=10, 
     metric="euclidean", 
-    cluster_selection_method='eom', 
+    cluster_selection_method='eom',
     prediction_data=True
     )
 
 # 5. BERTopic 모델 생성
 topic_model = BERTopic(
-    embedding_model="all-MiniLM-L6-v2",
+    embedding_model="all-MiniLM-L6-v2",  # 영어 데이터일 경우
     umap_model=umap_model,
     hdbscan_model=hdbscan_model,
     min_topic_size=10,
     nr_topics="auto",
     verbose=True
-)
+    )
 
-# 6. 클러스터링 수행
-topics, probs = topic_model.fit_transform(reduced_docs)
+# 6. 모델 학습
+topics, probs = topic_model.fit_transform(docs)
 
-# 7. 결과 확인 및 저장
+save_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\BERTopic\my_model"
+topic_model.save(save_path)
+
+# 7. 토픽 정보 출력
 print(topic_model.get_topic_info())
 
-# 8. 결과 시각화
+# 8. 대표 키워드 확인 (예: Topic 0)
+print("\n[Topic 0 키워드]")
+print(topic_model.get_topic(0))
+
+# 9. 결과 시각화
+topic_model.visualize_topics()
+
+# 10. 결과 저장 (선택)
+df['topic'] = topics
+df.to_csv("entity_topics.csv", index=False)
+
+
+# %%
+import plotly.io as pio
+from bertopic import BERTopic
+
+load_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\BERTopic\my_model"
+topic_model = BERTopic.load(load_path)
+
+topics, probs = topic_model.transform(docs)
+
+# 시각화 출력
 pio.renderers.default = 'browser'
 topic_model.visualize_topics()
 
-# 9. 결과 저장
-df['topic'] = topics
-df.to_csv("entity_topics_keybert.csv", index=False)
-topic_model.save("C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model")
-
+# %%
