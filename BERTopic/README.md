@@ -35,7 +35,7 @@ BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 | 토픽 번호    | 문서 수 | 주요 키워드                                 | 주제                                           |
 | ------------ | ---- | -------------------------------------------- | --------------------------------------------------- |
-| -1    | 105  | combustion, internal, engine, carbon, and...        | 내연기관/연소 관련 문서이나 군집되지 않은 문서 (키워드 다양도 높음, 방향성 모호) |
+| -1    | 105  | combustion, internal, engine, carbon, and...        | 내연기관/연소 관련 문서이나 군집되지 않은 문서 <br> (키워드 다양도 높음, 방향성 모호) |
 | 0     | 75   | filter, particulate, honeycomb, filtration, ceramic | DPF 및 미세입자 필터링 (허니컴 구조, 세라믹 필터 등)               |
 | 1     | 61   | exhaust, gas, temperature, pressure, engine         | 배기 가스 및 온도/압력 제어 시스템 (센서 기반 엔진 제어 가능성)          |
 | 2     | 50   | vehicles, equipment, automobiles, buildings         | 차량 및 장비 관련 일반 문서 (구체 주제 없음, 외연 넓음)              |
