@@ -32,19 +32,21 @@ BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>➡️ 아무것도 모르는 상태에서 감 잡기로 해본 것이라 무시해도 됨.
 <br>
 <br>BERTopic_2는 해당 링크 참고 (https://mz-moonzoo.tistory.com/23)
-| 토픽 번호 | 원래 이름                                   | 주제             |
-| ----- | ---------------------------------------------- | --------------------- |
-| -1    | `-1_combustion_internal_engine_of`             | 내연기관 및 연소 기술      |
-| 0     | `0_filter_particulate_honeycomb_filtration`    | 입자 필터 및 허니컴 여과 기술 |
-| 1     | `1_exhaust_gas_the_temperature`                | 배기가스 온도 및 특성     |
-| 2     | `2_vehicles_equipment_automobiles_buildings`   | 자동차 및 관련 장비      |
-| 3     | `3_nox_reduction_emissions_burn`               | NOx 저감 및 배출 제어   |
-| 4     | `4_catalyst_catalytic_oxidation_deterioration` | 촉매 산화 및 열화 현상    |
-| 5     | `5_sulfur_removal_hydrogen_sulfide`            | 황 제거 및 황화수소 처리    |
-| 6     | `6_effects_harmful_environment_pollution`      | 유해 물질 및 환경 영향    |
-| 7     | `7_fuel_engines_engine_diesel`                 | 디젤 연료 및 엔진 효율     |
-| 8     | `8_nitrogen_oxides_removing_oxide`             | 질소산화물 제거 기술       |
-| 9     | `9_ammonia_into_infrastructure_possible`       | 암모니아 기반 인프라 가능성   |
+
+| 토픽 번호    | 문서 수 | 주요 키워드                                 | 주제                                           |
+| ------------ | ---- | -------------------------------------------- | --------------------------------------------------- |
+| -1    | 105  | combustion, internal, engine, carbon, and...        | 내연기관/연소 관련 문서이나 군집되지 않은 문서 (키워드 다양도 높음, 방향성 모호) |
+| 0     | 75   | filter, particulate, honeycomb, filtration, ceramic | DPF 및 미세입자 필터링 (허니컴 구조, 세라믹 필터 등)               |
+| 1     | 61   | exhaust, gas, temperature, pressure, engine         | 배기 가스 및 온도/압력 제어 시스템 (센서 기반 엔진 제어 가능성)          |
+| 2     | 50   | vehicles, equipment, automobiles, buildings         | 차량 및 장비 관련 일반 문서 (구체 주제 없음, 외연 넓음)              |
+| 3     | 49   | nox, reduction, emissions, burn, lean               | 질소산화물(NOx) 저감 (연소 최적화, lean burn 등 포함)          |
+| 4     | 36   | catalyst, catalytic, oxidation, deterioration       | 촉매 반응 및 열화 (산화 촉매의 열화 또는 수명 관련)                 |
+| 5     | 32   | sulfur, removal, hydrogen, sulfide                  | 황 제거 및 황화수소 처리 기술 (탈황 공정)                       |
+| 6     | 27   | effects, harmful, environment, pollution            | 대기오염 및 환경 영향 분석 (건강 영향, 유해성 중심)                 |
+| 7     | 25   | fuel, engines, engine, diesel, lean                 | 연료 소비 및 디젤 엔진 운용 (연비, lean mixture 등)           |
+| 8     | 19   | nitrogen, oxides, removing, oxide                   | 질소산화물 제거 기술 (SCR 등) (촉매제 중심)                    |
+| 9     | 12   | ammonia, infrastructure, distribution, possible     | 암모니아 기반 인프라 시스템 (분산 및 저장 기술 포함)                 |
+
 <br>
 <br>BERTopic_3 version은 entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행.
 <br>➡️ KeyBERT 기반으로 entity_text를 핵심 키워드 중심으로 재구성하고, BERTopic으로 클러스터링
