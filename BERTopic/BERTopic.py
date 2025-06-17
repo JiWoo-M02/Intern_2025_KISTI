@@ -8,7 +8,7 @@ import plotly.io as pio
 
 # 1. CSV 파일 불러오기
 file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\overlapped_entities.csv"
-df = pd.read_csv(file_path, encoding="windows-1252")
+df = pd.read_csv(file_path, encoding = "windows-1252")
 
 # 2. KeyBERT 모델 로딩 (같은 sentence-transformers 기반)
 kw_model = KeyBERT(model="all-MiniLM-L6-v2")
@@ -22,8 +22,18 @@ def extract_keywords(text):
 reduced_docs = df['entity_text'].astype(str).apply(extract_keywords).tolist()
 
 # 4. 차원축소 + 클러스터링 모델 정의
-umap_model = umap.UMAP(n_neighbors=15, n_components=5, metric="cosine")
-hdbscan_model = hdbscan.HDBSCAN(min_cluster_size=10, metric="euclidean", cluster_selection_method='eom', prediction_data=True)
+umap_model = umap.UMAP(
+    n_neighbors=15, 
+    n_components=5, 
+    metric="cosine"
+    )
+
+hdbscan_model = hdbscan.HDBSCAN(
+    min_cluster_size=10, 
+    metric="euclidean", 
+    cluster_selection_method='eom', 
+    prediction_data=True
+    )
 
 # 5. BERTopic 모델 생성
 topic_model = BERTopic(
