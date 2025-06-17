@@ -3,19 +3,20 @@
 <br>➡️ 주제 설명에서 중요한 단어를 유지하면서도 쉽게 해석할 수 있는 조밀한 클러스터를 만드는 토픽 모델링 기술
 <br>
 <br>
-
+<br>
 
 # **Plan**
 2025.06.17.Tue 회의: 하고 있는 거 정리 + BERTopic 사용해서 결과
 <br>2025.06.18-20  팀장님 및 현호선생님 출장
 <br>
 <br>
-
+<br>
 
 
 # **Objective**
 problem 개체가 대략 10만개 있다고 한다면, 3~5만개 내외로 묶는다고 생각하면 됨.
 BERTopic git은 docs형식이라 국내 블로그나 해외 블로그 참고해서 해보라고 하심.
+<br>
 <br>
 
 ## EX
@@ -24,15 +25,16 @@ BERTopic git은 docs형식이라 국내 블로그나 해외 블로그 참고해�
 <br> - 열대 과일
 <br> - 사과
 <br> - 배
-
-
+<br>
+<br>
+<br>
 
 # **TimeLINE**
-BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
+NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>➡️ 아무것도 모르는 상태에서 감 잡기로 해본 것이라 무시해도 됨.
 <br>
-<br>BERTopic_2는 해당 링크 참고 (https://mz-moonzoo.tistory.com/23)
-
+<br>NO.2. BERTopic_2는 해당 링크 참고 (https://mz-moonzoo.tistory.com/23)
+<br>
 | 토픽 번호    | 문서 수 | 주요 키워드                                 | 주제                                           |
 | ------------ | ---- | -------------------------------------------- | --------------------------------------------------- |
 | -1    | 105  | combustion, internal, engine, carbon, and...        | 내연기관/연소 관련 문서이나 군집되지 않은 문서 <br> (키워드 다양도 높음, 방향성 모호) |
@@ -48,9 +50,9 @@ BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 9     | 12   | ammonia, infrastructure, distribution, possible     | 암모니아 기반 인프라 시스템 (분산 및 저장 기술 포함)                 |
 
 <br>
-<br>BERTopic_3 version은 entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행.
+<br>NO.3. BERTopic_3 version은 entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행.
 <br>➡️ KeyBERT 기반으로 entity_text를 핵심 키워드 중심으로 재구성하고, BERTopic으로 클러스터링
-
+<br>
 | 토픽 번호 | 문서 수 | 주요 키워드                                     | 주제                                  |
 | -------- | ---- | ------------------------------------------------- | -------------------------------------------- |
 | -1       | 112  | increase, carbon, diesel, denitration, soot, ... | 키워드가 흩어져 있거나 의미적으로 고립된 경우 (노이즈) |
