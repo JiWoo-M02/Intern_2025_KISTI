@@ -50,12 +50,12 @@ BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>➡️ KeyBERT 기반으로 entity_text를 핵심 키워드 중심으로 재구성하고, BERTopic으로 클러스터링
 | 토픽 번호      | 문서 수 | 주요 키워드                                     | 해석 / 주제                                  |
 | -------------- | ---- | ------------------------------------------------ | -------------------------------------------- |
-| **-1** *(노이즈)* | 112  | increase, carbon, diesel, denitration, soot, ... | 클러스터에 속하지 못한 문서들 (키워드가 흩어져 있거나 의미적으로 고립된 경우) |
-| **0**          | 145  | engine, combustion, exhaust, catalyst, diesel    | **엔진 연소 및 배기가스 관련 기술** (내연기관, 촉매 반응 등)       |
-| **1**          | 65   | nox, nitrogen, oxides, reduction, catalyst       | **질소산화물(NOx) 저감** 관련 기술 (촉매 환원 등)            |
-| **2**          | 63   | filter, honeycomb, filtration, particulate       | **DPF/PM 필터링 구조** (허니컴 필터, 세라믹 입자 제거 등)      |
-| **3**          | 32   | sulfur, removal, hydrogen sulfide                | **황 제거 기술** (H₂S 제거, 황화물 처리 등)               |
-| **4**          | 27   | harmful, environment, pollution, air             | **환경 유해성 및 대기오염 영향** 분석 (오염원, 건강 영향)         |
-| **5**          | 20   | vehicles, automobiles, military, equipment       | **차량/군용 장비 관련 문서** (배기 관련보다 차량 자체에 초점)       |
-| **6**          | 14   | ammonia, infrastructure, release, precursor      | **암모니아 기반 배출 시스템** 및 인프라 구축 논의               |
-| **7**          | 13   | manufacturers, researchers, commercially         | **제조사/연구자 중심**의 연구 동향 또는 기술 상용화 문서           |
+| -1 *(노이즈)* | 112  | increase, carbon, diesel, denitration, soot, ... | 클러스터에 속하지 못한 문서들 (키워드가 흩어져 있거나 의미적으로 고립된 경우) |
+| 0          | 145  | engine, combustion, exhaust, catalyst, diesel    | **엔진 연소 및 배기가스 관련 기술** (내연기관, 촉매 반응 등)       |
+| 1          | 65   | nox, nitrogen, oxides, reduction, catalyst       | **질소산화물(NOx) 저감** 관련 기술 (촉매 환원 등)            |
+| 2          | 63   | filter, honeycomb, filtration, particulate       | **DPF/PM 필터링 구조** (허니컴 필터, 세라믹 입자 제거 등)      |
+| 3          | 32   | sulfur, removal, hydrogen sulfide                | **황 제거 기술** (H₂S 제거, 황화물 처리 등)               |
+| 4          | 27   | harmful, environment, pollution, air             | **환경 유해성 및 대기오염 영향** 분석 (오염원, 건강 영향)         |
+| 5          | 20   | vehicles, automobiles, military, equipment       | **차량/군용 장비 관련 문서** (배기 관련보다 차량 자체에 초점)       |
+| 6          | 14   | ammonia, infrastructure, release, precursor      | **암모니아 기반 배출 시스템** 및 인프라 구축 논의               |
+| 7          | 13   | manufacturers, researchers, commercially         | **제조사/연구자 중심**의 연구 동향 또는 기술 상용화 문서           |
