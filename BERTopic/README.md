@@ -34,6 +34,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>➡️ 아무것도 모르는 상태에서 감 잡기로 해본 것이라 무시해도 됨.
 <br>
 <br>NO.2. BERTopic_2는 해당 링크 참고 (https://mz-moonzoo.tistory.com/23)
+<br>
+<br>
 
 | 토픽 번호    | 문서 수 | 주요 키워드                                 | 주제                                           |
 | ------------ | ---- | -------------------------------------------- | --------------------------------------------------- |
@@ -50,8 +52,10 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 9     | 12   | ammonia, infrastructure, distribution, possible     | 암모니아 기반 인프라 시스템 (분산 및 저장 기술 포함)                 |
 
 <br>
+<br>
 <br>NO.3. BERTopic_3 version은 entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행.
 <br>➡️ KeyBERT 기반으로 entity_text를 핵심 키워드 중심으로 재구성하고, BERTopic으로 클러스터링
+<br>
 <br>
 
 | 토픽 번호 | 문서 수 | 주요 키워드                                     | 주제                                  |
@@ -72,6 +76,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>KeyBERT에서 top_n 파라미터는 각 문서에서 의미적으로 가장 중요한 키워드를 몇 개 추출할지를 설정하는 값
 <br>KeyBERT 기반으로 문장에서 top 5 핵심 키워드를 추출해 문서를 재구성하고, 이를 BERTopic에 입력하여 의미 표현을 확장한 상태에서 클러스터링 수행.
 <br>
+<br>
 
 | 토픽 번호  | 문서 수 | 대표 키워드                    | 주제                         |
 | -- | ---- | --------------------------------------- | ------------------------------- |
@@ -88,9 +93,11 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 9  | 19   | internal, combustion, engine            | 내연기관 기술 및 연소 원리             |
 | 10 | 16   | manufacturers, researchers, commercial  | 산업계 및 연구기관 관련 기술 동향      |
 | 11 | 13   | ammonia, infrastructure, distribution   | 암모니아 기반 연료 인프라 및 배포 문제     |
+
 <br>
 <br>
 <br>NO.5. entity_topics_keybert_1
+<br>
 <br>
 
 | parameter          | size |
