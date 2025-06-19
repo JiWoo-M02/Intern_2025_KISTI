@@ -89,3 +89,16 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 9  | 19   | internal, combustion, engine            | 내연기관 기술 및 연소 원리             |
 | 10 | 16   | manufacturers, researchers, commercial  | 산업계 및 연구기관 관련 기술 동향      |
 | 11 | 13   | ammonia, infrastructure, distribution   | 암모니아 기반 연료 인프라 및 배포 문제     |
+<br>
+<br>
+<br>NO.5. entity_topics_keybert_1
+<br>
+
+| parameter          | size |
+| ------------------ | ---- |
+| top_n              | 5    |
+| n_neighbors        | 15   |
+| n_components       | 5    |
+| min_cluster_size   | 15   |
+| min_topic_size     | 10   |
+

@@ -7,9 +7,9 @@ import hdbscan
 import plotly.io as pio
 
 # 1. CSV 파일 불러오기
-file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\BERTopic\FA_entities.csv"
-# df = pd.read_csv(file_path, encoding="windows-1252")
-df = pd.read_csv(file_path, encoding="ISO-8859-1")
+file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\overlapped_entities.csv"
+df = pd.read_csv(file_path, encoding="windows-1252")
+#df = pd.read_csv(file_path, encoding="ISO-8859-1")
 
 # 1.1 "problem" 라벨 필터링
 df_filtered = df[df['entity_label'] == 'problem'].copy()
