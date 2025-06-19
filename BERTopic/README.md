@@ -95,8 +95,32 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>NO.5. entity_topics_keybert_1
+
+| 파라미터               | 값  | 설명                                   | 클러스터 크기/수에 미치는 영향                                              |
+| ---------------------- | -- | ------------------------------------ | ------------------------------------------------------------------- |
+| `top_n` | 5 | KeyBERT에서 한 문장당 추출할 핵심 키워드 수 | 높일수록 문서 표현이 풍부해져 더 세분화된 클러스터 생성 가능. <br>하지만 너무 높으면 잡음 증가 가능성 |
+| `n_neighbors` | 15 | UMAP에서 이웃으로 간주할 포인트 수 → 지역 밀도 기준 | 작게 설정하면 작은/조밀한 클러스터 증가, 크게 설정하면 더 큰 범위로 군집하려 함    |
+| `n_components` | 5  | UMAP의 차원 축소 결과 차원 수  | 높일수록 정보 손실이 줄어 클러스터 분해가 섬세해질 수 있음. <br>하지만 시각화에는 2\~5차원 정도 권장  |
+| `min_cluster_size` | 15 | HDBSCAN에서 하나의 클러스터로 인정되는 최소 문서 수 | 클러스터 수 감소 ↔ 노이즈 증가 감소, 작게 하면 더 많은 소형 클러스터 생성됨  |
+| `min_topic_size`  | 10 | BERTopic 내에서 최종 토픽으로 인정될 최소 문서 수| 이보다 작은 클러스터는 주제 축소(nr\_topics) 과정에서 병합됨, 낮출수록 더 많은 토픽 유지 가능 |
+
 <br>
+<br>
+<br>
+| 목표                     | 조정 추천                                                     |
+| ---------------------- | --------------------------------------------------------- |
+| **더 작은 클러스터도 포착하고 싶다** | `min_cluster_size ↓`, `min_topic_size ↓`, `n_neighbors ↓` |
+| **더 큰 주제 단위로 묶고 싶다**   | `min_cluster_size ↑`, `min_topic_size ↑`, `n_neighbors ↑` |
+| **노이즈(-1)가 너무 많다**     | `min_cluster_size ↑` 또는 `top_n ↓`                         |
+| **토픽 수가 너무 적다**        | `min_topic_size ↓`, `nr_topics=None` 지정                   |
+| **토픽 수가 너무 많다**        | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
+<br>
+<br>
+<br>
+
+<br>parameter 조절
+<br>NO.5. entity_topics_keybert_HE1
+<br>➡️ topic의 갯수 6개
 <br>
 
 | parameter          | size |
@@ -107,3 +131,16 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | min_cluster_size   | 15   |
 | min_topic_size     | 10   |
 
+<br>
+<br>
+<br>NO.6. entity_topics_keybert_HE2
+<br>➡️ topic의 갯수 314개
+<br>
+
+| parameter          | size |
+| ------------------ | ---- |
+| top_n              | 5    |
+| n_neighbors        | 15   |
+| n_components       | 5    |
+| min_cluster_size   | 2    |
+| min_topic_size     | 10   |

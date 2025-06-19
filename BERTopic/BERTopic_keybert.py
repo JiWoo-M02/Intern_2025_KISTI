@@ -7,9 +7,10 @@ import hdbscan
 import plotly.io as pio
 
 # 1. CSV 파일 불러오기
-file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\overlapped_entities.csv"
-df = pd.read_csv(file_path, encoding="windows-1252")
-#df = pd.read_csv(file_path, encoding="ISO-8859-1")
+#file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\overlapped_entities.csv"
+file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\BERTopic\FA_entities.csv"
+#df = pd.read_csv(file_path, encoding="windows-1252")
+df = pd.read_csv(file_path, encoding="ISO-8859-1")
 
 # 1.1 "problem" 라벨 필터링
 df_filtered = df[df['entity_label'] == 'problem'].copy()
@@ -34,7 +35,7 @@ umap_model = umap.UMAP(
     )
 
 hdbscan_model = hdbscan.HDBSCAN(
-    min_cluster_size=15, 
+    min_cluster_size=2, 
     metric="euclidean", 
     cluster_selection_method='eom', 
     prediction_data=True
@@ -55,14 +56,14 @@ topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 주제 정보 저장
 topic_info_df = topic_model.get_topic_info()
-topic_info_df.to_csv("entity_topic_info_HE1.csv", index=False)
+topic_info_df.to_csv("entity_topic_info_HE2.csv", index=False)
 
 # 필터링된 DataFrame에만 결과 저장
 df_filtered['topic'] = topics
-df_filtered.to_csv("entity_topics_keybert_HE1.csv", index=False)
+df_filtered.to_csv("entity_topics_keybert_HE2.csv", index=False)
 
 # 모델 저장
-topic_model.save("C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model_HE1")
+topic_model.save("C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model_HE2")
 
 # 7. 결과 확인 및 저장
 print(topic_model.get_topic_info())
@@ -70,7 +71,3 @@ print(topic_model.get_topic_info())
 # 8. 결과 시각화
 pio.renderers.default = 'browser'
 topic_model.visualize_topics()
-
-# 9. 결과 저장
-topic_info_df = topic_model.get_topic_info()
-topic_info_df.to_csv("entity_topic_info_HE1.csv", index=False)
