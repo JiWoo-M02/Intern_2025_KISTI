@@ -33,7 +33,9 @@ BERTopic git은 docs형식이라 국내 블로그나 해외 블로그 참고해�
 NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>➡️ 아무것도 모르는 상태에서 감 잡기로 해본 것이라 무시해도 됨.
 <br>
-<br>NO.2. BERTopic_2는 해당 링크 참고 (https://mz-moonzoo.tistory.com/23)
+<br>
+  
+  **NO.2. BERTopic_2는 해당 링크 참고** (https://mz-moonzoo.tistory.com/23)
 <br>
 
 | 토픽 번호    | 문서 수 | 주요 키워드                                 | 주제                                           |
@@ -52,7 +54,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>NO.3. BERTopic_3 version은 entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행.
+  
+  **NO.3. BERTopic_3 version은 entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행.**
 <br>➡️ KeyBERT 기반으로 entity_text를 핵심 키워드 중심으로 재구성하고, BERTopic으로 클러스터링
 <br>
 <br>
@@ -70,7 +73,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 7        | 13   | manufacturers, researchers, commercially         | 제조사/연구자 중심의 연구 동향 또는 기술 상용화 문서           |
 
 <br>
-<br>NO.4. BERTopic_4 version은 기존 'top_n=3'에서 'top_n=5'로 증가시켜 진행.
+  
+  **NO.4. BERTopic_4 version은 기존 'top_n=3'에서 'top_n=5'로 증가시켜 진행.**
 <br>➡️ 비슷한 개념끼리 더 세분화되게 묶어보는 것을 목표로 실행.
 <br>KeyBERT에서 top_n 파라미터는 각 문서에서 의미적으로 가장 중요한 키워드를 몇 개 추출할지를 설정하는 값
 <br>KeyBERT 기반으로 문장에서 top 5 핵심 키워드를 추출해 문서를 재구성하고, 이를 BERTopic에 입력하여 의미 표현을 확장한 상태에서 클러스터링 수행.
@@ -110,11 +114,11 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 | 목표                     | 조정 추천                                                     |
 | ---------------------- | --------------------------------------------------------- |
-| **더 작은 클러스터도 포착하고 싶다** | `min_cluster_size ↓`, `min_topic_size ↓`, `n_neighbors ↓` |
-| **더 큰 주제 단위로 묶고 싶다**   | `min_cluster_size ↑`, `min_topic_size ↑`, `n_neighbors ↑` |
-| **노이즈(-1)가 너무 많다**     | `min_cluster_size ↑` 또는 `top_n ↓`                         |
-| **토픽 수가 너무 적다**        | `min_topic_size ↓`, `nr_topics=None` 지정                   |
-| **토픽 수가 너무 많다**        | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
+| 더 작은 클러스터도 포착하고 싶다 | `min_cluster_size ↓`, `min_topic_size ↓`, `n_neighbors ↓` |
+| 더 큰 주제 단위로 묶고 싶다   | `min_cluster_size ↑`, `min_topic_size ↑`, `n_neighbors ↑` |
+| 노이즈(-1)가 너무 많다    | `min_cluster_size ↑` 또는 `top_n ↓`                         |
+| 토픽 수가 너무 적다       | `min_topic_size ↓`, `nr_topics=None` 지정                   |
+| 토픽 수가 너무 많다       | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
 <br>
 <br>
 <br>
@@ -132,9 +136,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | min_cluster_size   | 15   |
 | min_topic_size     | 10   |
 
-<br>
-<br>
-<br>**NO.6. entity_topics_keybert_FA2**
+  
+  **NO.6. entity_topics_keybert_FA2**
 <br>➡️ topic의 갯수 314개
 <br>📌 topic의 갯수가 너무 많음. **NO.7**에서는 min_topic_size를 2로 조정.
 
@@ -148,7 +151,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>**NO.7. entity_topics_keybert_FA3**
+  
+  **NO.7. entity_topics_keybert_FA3**
 <br>➡️ topic의 갯수 321개
 <br>
 
@@ -176,7 +180,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>**NO.9. entity_topics_keybert_FA5**
+  
+  **NO.9. entity_topics_keybert_FA5**
 <br>➡️ topic의 갯수 312개
 <br>
 
@@ -190,7 +195,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>**NO.10. entity_topics_keybert_FA6**
+  
+  **NO.10. entity_topics_keybert_FA6**
 <br>➡️ topic의 갯수 284개
 <br>📌1. topic의 갯수는 전과 다르게 줄어듦.
 <br>📌2. 그러나 entity text에 표기된 topic label을 보면, **NO.9**보다 질적으로 떨어짐.
