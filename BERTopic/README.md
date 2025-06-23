@@ -199,8 +199,6 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | entity_text                                                   | topic                                                                      |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | being alone might be a problem when faced with an emergency   | -1_systems_person_elderly_patient <br>4_care_caregivers_general_caregiver  |        
-<br>        
-<br>
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -227,4 +225,3 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
 
-**parameter**
