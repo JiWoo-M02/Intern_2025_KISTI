@@ -124,9 +124,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
 <br>
-
-<br>
-<br>**NO.5. entity_topics_keybert_FA1**
+  
+  **NO.5. entity_topics_keybert_FA1**
 <br>➡️ topic의 개수 6개
 <br>
 
