@@ -107,18 +107,18 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 
 
-| 목표                     | 조정 추천                                                     |
-| ---------------------- | --------------------------------------------------------- |
+| 목표                          | 조정 추천                                                     |
+| ----------------------------- | --------------------------------------------------------- |
 | 더 작은 클러스터도 포착하고 싶다 | `min_cluster_size ↓`, `min_topic_size ↓`, `n_neighbors ↓` |
-| 더 큰 주제 단위로 묶고 싶다   | `min_cluster_size ↑`, `min_topic_size ↑`, `n_neighbors ↑` |
-| 노이즈(-1)가 너무 많다    | `min_cluster_size ↑` 또는 `top_n ↓`                         |
-| 토픽 수가 너무 적다       | `min_topic_size ↓`, `nr_topics=None` 지정                   |
-| 토픽 수가 너무 많다       | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
+| 더 큰 주제 단위로 묶고 싶다      | `min_cluster_size ↑`, `min_topic_size ↑`, `n_neighbors ↑` |
+| 노이즈(-1)가 너무 많다          | `min_cluster_size ↑` 또는 `top_n ↓`                         |
+| 토픽 수가 너무 적다             | `min_topic_size ↓`, `nr_topics=None` 지정                   |
+| 토픽 수가 너무 많다             | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
 <br>
 <br>
 <br>
   
-  **NO.1. entity_topics_keybert_FA1**
+**NO.1. entity_topics_keybert_FA1**
 <br>➡️ topic의 개수 6개
 <br>📌 **NO.2**부터는 'min_cluster_size'를 2로 조정.
 
@@ -132,7 +132,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.2. entity_topics_keybert_FA2**
+**NO.2. entity_topics_keybert_FA2**
 <br>➡️ topic의 개수 314개
 <br>📌 **NO.3**부터는 'min_topic_size'를 2로 조정.
 
@@ -147,7 +147,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.3. entity_topics_keybert_FA3**
+**NO.3. entity_topics_keybert_FA3**
 <br>➡️ topic의 개수 321개
 <br>📌 **NO.4**에서는 'n_neighbors'를 30으로, 'min_topic_size'를 10으로 조정.
 
@@ -162,7 +162,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.4. entity_topics_keybert_FA4**
+**NO.4. entity_topics_keybert_FA4**
 <br>➡️ topic의 개수 309개
 <br>📌 **NO.5**에서는 'n_neighbors'를 50으로, 'min_topic_size'를 20으로 조정.
 
@@ -177,7 +177,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.5. entity_topics_keybert_FA5**
+**NO.5. entity_topics_keybert_FA5**
 <br>➡️ topic의 개수 312개
 <br>📌 **NO.6**에서는 'n_neighbors'를 100으로 조정.
 
@@ -192,12 +192,14 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.6. entity_topics_keybert_FA6**
+**NO.6. entity_topics_keybert_FA6**
 <br>➡️ topic의 개수 284개
 <br> 📌1. topic의 갯수는 전과 다르게 줄어듦.
-<br> 📌2. 같은 entity_text "being alone might be a problem when faced with an emergency"인데, 다른 topic으로 표기됨.
-<br>       -1_systems_person_elderly_patient
-<br>        4_care_caregivers_general_caregiver
+<br> 📌2. 같은 entity_text인데, 다른 topic으로 표기됨.
+| entity_text                                                   | topic                                                                      |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| being alone might be a problem when faced with an emergency   | -1_systems_person_elderly_patient <br>4_care_caregivers_general_caregiver  |        
+<br>        
 <br>
 
 | parameter          | size |
@@ -207,11 +209,10 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | n_components       | 5    |
 | min_cluster_size   | 2    |
 | min_topic_size     | 20   |
-
 <br>
 <br>
   
-  **NO.7. entity_topics_keybert_FA7**
+**NO.7. entity_topics_keybert_FA7**
 <br>➡️ topic의 개수 79개
 <br>
 
@@ -222,3 +223,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | n_components       | 5    |
 | min_cluster_size   | 5    |
 | min_topic_size     | 20   |
+<br>
+<br>
+<br>
+
+**parameter**
