@@ -12,8 +12,11 @@ file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\BERTopi
 #df = pd.read_csv(file_path, encoding="windows-1252")
 df = pd.read_csv(file_path, encoding="ISO-8859-1")
 
-# 1.1 "problem" 라벨 필터링
-df_filtered = df[df['entity_label'] == 'problem'].copy()
+
+# 1.1 원하는 entity_label만 필터링
+label_to_process = 'problem'
+df_filtered = df[df['entity_label'] == label_to_process].copy()
+
 
 # 2. KeyBERT 로딩 (같은 sentence-transformers 기반)
 kw_model = KeyBERT(model="all-MiniLM-L6-v2")
@@ -29,7 +32,7 @@ reduced_docs = df_filtered['entity_text'].astype(str).apply(extract_keywords).to
 
 # 4. 차원축소 + 클러스터링 모델 정의
 umap_model = umap.UMAP(
-    n_neighbors=15, 
+    n_neighbors=50, 
     n_components=5, 
     metric="cosine"
     )
@@ -46,7 +49,7 @@ topic_model = BERTopic(
     embedding_model="all-MiniLM-L6-v2",
     umap_model=umap_model,
     hdbscan_model=hdbscan_model,
-    min_topic_size=10,
+    min_topic_size=20,
     nr_topics="auto",
     verbose=True
 )
@@ -55,15 +58,17 @@ topic_model = BERTopic(
 topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 주제 정보 저장
+num = 5
 topic_info_df = topic_model.get_topic_info()
-topic_info_df.to_csv("entity_topic_info_FA3.csv", index=False)
+topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topic_info_{label_to_process}_{num}.csv", index=False)
 
 # 필터링된 DataFrame에만 결과 저장
 df_filtered['topic'] = topics
-df_filtered.to_csv("entity_topics_keybert_FA3.csv", index=False)
+df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topics_keybert_{label_to_process}_{num}.csv", index=False)
 
 # 모델 저장
-topic_model.save("C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model_FA3")
+topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model_{label_to_process}_{num}")
+
 
 # 7. 결과 확인 및 저장
 print(topic_model.get_topic_info())
