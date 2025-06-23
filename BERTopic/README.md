@@ -118,9 +118,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.5. entity_topics_keybert_FA1**
+  **NO.1. entity_topics_keybert_FA1**
 <br>➡️ topic의 개수 6개
-<br>📌 **NO.6**부터는 'min_cluster_size'를 2로 조정.
+<br>📌 **NO.2**부터는 'min_cluster_size'를 2로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -132,9 +132,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.6. entity_topics_keybert_FA2**
+  **NO.2. entity_topics_keybert_FA2**
 <br>➡️ topic의 개수 314개
-<br>📌 **NO.7**부터는 'min_topic_size'를 2로 조정.
+<br>📌 **NO.3**부터는 'min_topic_size'를 2로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -147,9 +147,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.7. entity_topics_keybert_FA3**
+  **NO.3. entity_topics_keybert_FA3**
 <br>➡️ topic의 개수 321개
-<br>📌 **NO.8**에서는 'n_neighbors'를 30으로, 'min_topic_size'를 10으로 조정.
+<br>📌 **NO.4**에서는 'n_neighbors'를 30으로, 'min_topic_size'를 10으로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -162,9 +162,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.8. entity_topics_keybert_FA4**
+  **NO.4. entity_topics_keybert_FA4**
 <br>➡️ topic의 개수 309개
-<br>📌 **NO.9**에서는 'n_neighbors'를 50으로, 'min_topic_size'를 20으로 조정.
+<br>📌 **NO.5**에서는 'n_neighbors'를 50으로, 'min_topic_size'를 20으로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -177,9 +177,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.9. entity_topics_keybert_FA5**
+  **NO.5. entity_topics_keybert_FA5**
 <br>➡️ topic의 개수 312개
-<br>📌 **NO.10**에서는 'n_neighbors'를 100으로 조정.
+<br>📌 **NO.6**에서는 'n_neighbors'를 100으로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -192,7 +192,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.10. entity_topics_keybert_FA6**
+  **NO.6. entity_topics_keybert_FA6**
 <br>➡️ topic의 개수 284개
 <br> 📌1. topic의 갯수는 전과 다르게 줄어듦.
 <br> 📌2. 같은 entity_text "being alone might be a problem when faced with an emergency"인데, 다른 topic으로 표기됨.
@@ -211,7 +211,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.11. entity_topics_keybert_FA7**
+  **NO.7. entity_topics_keybert_FA7**
 <br>➡️ topic의 개수 79개
 <br>
 
