@@ -120,7 +120,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 
 <br>parameter 조절
-<br>NO.5. entity_topics_keybert_FA1
+<br>**NO.5. entity_topics_keybert_FA1**
 <br>➡️ topic의 갯수 6개
 <br>
 
@@ -134,7 +134,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>NO.6. entity_topics_keybert_FA2
+<br>**NO.6. entity_topics_keybert_FA2**
 <br>➡️ topic의 갯수 314개
 <br>📌 topic의 갯수가 너무 많음. **NO.7**에서는 min_topic_size를 2로 조정.
 
@@ -148,7 +148,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>NO.7. entity_topics_keybert_FA3
+<br>**NO.7. entity_topics_keybert_FA3**
 <br>➡️ topic의 갯수 321개
 <br>
 
@@ -162,7 +162,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>NO.8. entity_topics_keybert_FA4
+<br>**NO.8. entity_topics_keybert_FA4**
 <br>➡️ topic의 갯수 309개
 <br>
 
@@ -176,7 +176,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>NO.8. entity_topics_keybert_FA5
+<br>**NO.9. entity_topics_keybert_FA5**
 <br>➡️ topic의 갯수 312개
 <br>
 
@@ -188,3 +188,18 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | min_cluster_size   | 2    |
 | min_topic_size     | 20   |
 
+<br>
+<br>
+<br>**NO.10. entity_topics_keybert_FA6**
+<br>➡️ topic의 갯수 284개
+<br>📌1. topic의 갯수는 전과 다르게 줄어듦.
+<br>📌2. 그러나 entity text에 표기된 topic label을 보면, **NO.9**보다 질적으로 떨어짐.
+<br>
+
+| parameter          | size |
+| ------------------ | ---- |
+| top_n              | 5    |
+| n_neighbors        | 100  |
+| n_components       | 5    |
+| min_cluster_size   | 2    |
+| min_topic_size     | 20   |

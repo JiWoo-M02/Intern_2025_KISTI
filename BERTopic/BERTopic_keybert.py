@@ -15,6 +15,8 @@ df = pd.read_csv(file_path, encoding="ISO-8859-1")
 
 # 1.1 원하는 entity_label만 필터링
 label_to_process = 'problem'
+#label_to_process = 'solution'
+#label_to_process = 'target'
 df_filtered = df[df['entity_label'] == label_to_process].copy()
 
 
@@ -32,7 +34,7 @@ reduced_docs = df_filtered['entity_text'].astype(str).apply(extract_keywords).to
 
 # 4. 차원축소 + 클러스터링 모델 정의
 umap_model = umap.UMAP(
-    n_neighbors=50, 
+    n_neighbors=100, 
     n_components=5, 
     metric="cosine"
     )
@@ -58,7 +60,7 @@ topic_model = BERTopic(
 topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 주제 정보 저장
-num = 5
+num = 6
 topic_info_df = topic_model.get_topic_info()
 topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topic_info_{label_to_process}_{num}.csv", index=False)
 
