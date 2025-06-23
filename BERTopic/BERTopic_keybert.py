@@ -56,14 +56,14 @@ topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 주제 정보 저장
 topic_info_df = topic_model.get_topic_info()
-topic_info_df.to_csv("entity_topic_info_HE2.csv", index=False)
+topic_info_df.to_csv("entity_topic_info_FA3.csv", index=False)
 
 # 필터링된 DataFrame에만 결과 저장
 df_filtered['topic'] = topics
-df_filtered.to_csv("entity_topics_keybert_HE2.csv", index=False)
+df_filtered.to_csv("entity_topics_keybert_FA3.csv", index=False)
 
 # 모델 저장
-topic_model.save("C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model_HE2")
+topic_model.save("C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model_FA3")
 
 # 7. 결과 확인 및 저장
 print(topic_model.get_topic_info())
