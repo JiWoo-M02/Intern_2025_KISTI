@@ -135,7 +135,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | n_components       | 5    |
 | min_cluster_size   | 15   |
 | min_topic_size     | 10   |
-
+<br>
+<br>
   
   **NO.6. entity_topics_keybert_FA2**
 <br>➡️ topic의 갯수 314개
@@ -166,7 +167,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 <br>
-<br>**NO.8. entity_topics_keybert_FA4**
+  
+  **NO.8. entity_topics_keybert_FA4**
 <br>➡️ topic의 갯수 309개
 <br>
 
