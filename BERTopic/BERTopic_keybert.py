@@ -9,8 +9,7 @@ import plotly.io as pio
 # 1. CSV 파일 불러오기
 #file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\overlapped_entities.csv"
 file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\BERTopic\FA_entities.csv"
-#df = pd.read_csv(file_path, encoding="windows-1252")
-df = pd.read_csv(file_path, encoding="ISO-8859-1")
+df = pd.read_csv(file_path, encoding="utf-8")
 
 
 # 1.1 원하는 entity_label만 필터링
@@ -21,21 +20,21 @@ df_filtered = df[df['entity_label'] == label_to_process].copy()
 
 
 # 2. KeyBERT 로딩 (같은 sentence-transformers 기반)
-kw_model = KeyBERT(model="all-MiniLM-L6-v2")
+#kw_model = KeyBERT(model="all-MiniLM-L6-v2")
 
 # 3. 핵심 키워드 추출 함수
-def extract_keywords(text):
-    keywords = kw_model.extract_keywords(str(text), keyphrase_ngram_range=(1, 1), stop_words='english', top_n=5)
-    return " ".join([kw for kw, _ in keywords])
+#def extract_keywords(text):
+#    keywords = kw_model.extract_keywords(str(text), keyphrase_ngram_range=(1, 1), stop_words='english', top_n=5)
+#    return " ".join([kw for kw, _ in keywords])
 
 # 핵심 키워드 문서 리스트 생성
-reduced_docs = df_filtered['entity_text'].astype(str).apply(extract_keywords).tolist()
+reduced_docs = df_filtered['entity_text']
 
 
 # 4. 차원축소 + 클러스터링 모델 정의
 umap_model = umap.UMAP(
     n_neighbors=100, 
-    n_components=5, 
+    n_components=768, 
     metric="cosine"
     )
 
@@ -60,7 +59,7 @@ topic_model = BERTopic(
 topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 주제 정보 저장
-num = 7
+num = 9
 topic_info_df = topic_model.get_topic_info()
 topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topic_info_{label_to_process}_{num}.csv", index=False)
 
@@ -74,7 +73,3 @@ topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BE
 
 # 7. 결과 확인 및 저장
 print(topic_model.get_topic_info())
-
-# 8. 결과 시각화
-pio.renderers.default = 'browser'
-topic_model.visualize_topics()
