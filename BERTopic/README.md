@@ -5,13 +5,6 @@
 <br>
 <br>
 
-# **Plan**
-2025.06.17.Tue 회의: BERTopic 사용해서 결과
-<br>2025.06.18-20  팀장님 및 현호선생님 출장
-<br>2025.06.19.Thu : 진행 상황 정리해서 이메일로 송부드리기
-<br>
-<br>
-
 
 # **Objective**
 problem 개체가 대략 10만개 있다고 한다면, 3~5만개 내외로 묶는다고 생각하면 됨.
@@ -103,31 +96,31 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 ## parameter 조절
 <br>
 
-| 파라미터               | 값  | 설명                                   | 클러스터 크기/수에 미치는 영향                                              |
-| ---------------------- | -- | ------------------------------------ | ------------------------------------------------------------------- |
-| `top_n` | 5 | KeyBERT에서 한 문장당 추출할 핵심 키워드 수 | 높일수록 문서 표현이 풍부해져 더 세분화된 클러스터 생성 가능. <br>하지만 너무 높으면 잡음 증가 가능성 |
-| `n_neighbors` | 15 | UMAP에서 이웃으로 간주할 포인트 수 → 지역 밀도 기준 | 작게 설정하면 작은/조밀한 클러스터 증가, 크게 설정하면 더 큰 범위로 군집하려 함    |
-| `n_components` | 5  | UMAP의 차원 축소 결과 차원 수  | 높일수록 정보 손실이 줄어 클러스터 분해가 섬세해질 수 있음. <br>하지만 시각화에는 2\~5차원 정도 권장  |
-| `min_cluster_size` | 15 | HDBSCAN에서 하나의 클러스터로 인정되는 최소 문서 수 | 클러스터 수 감소 ↔ 노이즈 증가 감소, 작게 하면 더 많은 소형 클러스터 생성됨  |
-| `min_topic_size`  | 10 | BERTopic 내에서 최종 토픽으로 인정될 최소 문서 수| 이보다 작은 클러스터는 주제 축소(nr\_topics) 과정에서 병합됨, 낮출수록 더 많은 토픽 유지 가능 |
+| 파라미터               | 설명                                   | 클러스터 크기/수에 미치는 영향                                              |
+| ---------------------- | ------------------------------------ | ------------------------------------------------------------------- |
+| `top_n` | KeyBERT에서 한 문장당 추출할 핵심 키워드 수 | 높일수록 문서 표현이 풍부해져 더 세분화된 클러스터 생성 가능. <br>하지만 너무 높으면 잡음 증가 가능성 |
+| `n_neighbors` | UMAP에서 이웃으로 간주할 포인트 수 → 지역 밀도 기준 | 작게 설정하면 작은/조밀한 클러스터 증가, 크게 설정하면 더 큰 범위로 군집하려 함    |
+| `n_components` | UMAP의 차원 축소 결과 차원 수  | 높일수록 정보 손실이 줄어 클러스터 분해가 섬세해질 수 있음. <br>하지만 시각화에는 2\~5차원 정도 권장  |
+| `min_cluster_size` | HDBSCAN에서 하나의 클러스터로 인정되는 최소 문서 수 | 클러스터 수 감소 ↔ 노이즈 증가 감소, 작게 하면 더 많은 소형 클러스터 생성됨  |
+| `min_topic_size`  | BERTopic 내에서 최종 토픽으로 인정될 최소 문서 수| 이보다 작은 클러스터는 주제 축소(nr\_topics) 과정에서 병합됨, 낮출수록 더 많은 토픽 유지 가능 |
 
 <br>
 
 
-| 목표                     | 조정 추천                                                     |
-| ---------------------- | --------------------------------------------------------- |
+| 목표                          | 조정 추천                                                     |
+| ----------------------------- | --------------------------------------------------------- |
 | 더 작은 클러스터도 포착하고 싶다 | `min_cluster_size ↓`, `min_topic_size ↓`, `n_neighbors ↓` |
-| 더 큰 주제 단위로 묶고 싶다   | `min_cluster_size ↑`, `min_topic_size ↑`, `n_neighbors ↑` |
-| 노이즈(-1)가 너무 많다    | `min_cluster_size ↑` 또는 `top_n ↓`                         |
-| 토픽 수가 너무 적다       | `min_topic_size ↓`, `nr_topics=None` 지정                   |
-| 토픽 수가 너무 많다       | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
+| 더 큰 주제 단위로 묶고 싶다      | `min_cluster_size ↑`, `min_topic_size ↑`, `n_neighbors ↑` |
+| 노이즈(-1)가 너무 많다          | `min_cluster_size ↑` 또는 `top_n ↓`                         |
+| 토픽 수가 너무 적다             | `min_topic_size ↓`, `nr_topics=None` 지정                   |
+| 토픽 수가 너무 많다             | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
 <br>
 <br>
 <br>
   
-  **NO.5. entity_topics_keybert_FA1**
+**NO.1. entity_topics_keybert_FA1**
 <br>➡️ topic의 개수 6개
-<br>
+<br>📌 **NO.2**부터는 'min_cluster_size'를 2로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -139,9 +132,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.6. entity_topics_keybert_FA2**
+**NO.2. entity_topics_keybert_FA2**
 <br>➡️ topic의 개수 314개
-<br>📌 **NO.7**부터는 'min_topic_size'를 2로 조정.
+<br>📌 **NO.3**부터는 'min_topic_size'를 2로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -154,9 +147,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.7. entity_topics_keybert_FA3**
+**NO.3. entity_topics_keybert_FA3**
 <br>➡️ topic의 개수 321개
-<br>📌 **NO.8**에서는 'n_neighbors'를 30으로, 'min_topic_size'를 10으로 조정.
+<br>📌 **NO.4**에서는 'n_neighbors'를 30으로, 'min_topic_size'를 10으로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -169,9 +162,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.8. entity_topics_keybert_FA4**
+**NO.4. entity_topics_keybert_FA4**
 <br>➡️ topic의 개수 309개
-<br>📌 **NO.9**에서는 'n_neighbors'를 50으로, 'min_topic_size'를 20으로 조정.
+<br>📌 **NO.5**에서는 'n_neighbors'를 50으로, 'min_topic_size'를 20으로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -184,9 +177,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.9. entity_topics_keybert_FA5**
+**NO.5. entity_topics_keybert_FA5**
 <br>➡️ topic의 개수 312개
-<br>📌 **NO.10**에서는 'n_neighbors'를 100으로 조정.
+<br>📌 **NO.6**에서는 'n_neighbors'를 100으로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -199,13 +192,13 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.10. entity_topics_keybert_FA6**
+**NO.6. entity_topics_keybert_FA6**
 <br>➡️ topic의 개수 284개
 <br> 📌1. topic의 갯수는 전과 다르게 줄어듦.
-<br> 📌2. 같은 entity_text "being alone might be a problem when faced with an emergency"인데, 다른 topic으로 표기됨.
-<br>       -1_systems_person_elderly_patient
-<br>        4_care_caregivers_general_caregiver
-<br>
+<br> 📌2. 같은 entity_text인데, 다른 topic으로 표기됨.
+| entity_text                                                   | topic                                                                      |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| being alone might be a problem when faced with an emergency   | -1_systems_person_elderly_patient <br>4_care_caregivers_general_caregiver  |        
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -214,11 +207,10 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | n_components       | 5    |
 | min_cluster_size   | 2    |
 | min_topic_size     | 20   |
-
 <br>
 <br>
   
-  **NO.11. entity_topics_keybert_FA7**
+**NO.7. entity_topics_keybert_FA7**
 <br>➡️ topic의 개수 79개
 <br>
 
@@ -229,3 +221,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | n_components       | 5    |
 | min_cluster_size   | 5    |
 | min_topic_size     | 20   |
+<br>
+<br>
+<br>
+
