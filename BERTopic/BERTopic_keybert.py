@@ -40,7 +40,7 @@ umap_model = umap.UMAP(
     )
 
 hdbscan_model = hdbscan.HDBSCAN(
-    min_cluster_size=2, 
+    min_cluster_size=5, 
     metric="euclidean", 
     cluster_selection_method='eom', 
     prediction_data=True
@@ -60,7 +60,7 @@ topic_model = BERTopic(
 topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 주제 정보 저장
-num = 6
+num = 7
 topic_info_df = topic_model.get_topic_info()
 topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topic_info_{label_to_process}_{num}.csv", index=False)
 
