@@ -120,7 +120,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
   
   **NO.5. entity_topics_keybert_FA1**
 <br>➡️ topic의 개수 6개
-<br>
+<br>📌 **NO.6**부터는 'min_cluster_size'를 2로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
@@ -134,7 +134,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
   
   **NO.6. entity_topics_keybert_FA2**
 <br>➡️ topic의 개수 314개
-<br>📌 **NO.7**부터는 'min_cluster_size'를 2로 조정.
+<br>📌 **NO.7**부터는 'min_topic_size'를 2로 조정.
 
 | parameter          | size |
 | ------------------ | ---- |
