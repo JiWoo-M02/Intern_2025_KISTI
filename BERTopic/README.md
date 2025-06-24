@@ -4,7 +4,8 @@
 <br>
 <br>
 <br>
-
+<br>
+<br>
 
 # **Objective**
 problem 개체가 대략 10만개 있다고 한다면, 3~5만개 내외로 묶는다고 생각하면 됨.
@@ -12,23 +13,26 @@ BERTopic git은 docs형식이라 국내 블로그나 해외 블로그 참고해�
 <br>
 <br>
 
-## EX
+## example
 아래와 같이 과일 하나로 묶을 수 있도록. 대신 유니크한 것들은 따로 제외
-<br> 과일
+<br> Topic: 과일
 <br> - 열대 과일
-<br> - 사과
+<br> - 사과 나무
 <br> - 배
+<br>
+<br>
 <br>
 <br>
 <br>
 
 # **TimeLINE**
 NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
-<br>➡️ 아무것도 모르는 상태에서 감 잡기로 해본 것이라 무시해도 됨.
+<br>  ➜ 아무것도 모르는 상태에서 감 잡기로 해본 것.(= 무시해도 무관)
+<br>  해당 링크: https://maartengr.github.io/BERTopic/index.html
 <br>
 <br>
   
-  **NO.2. BERTopic_2는 해당 링크 참고** (https://mz-moonzoo.tistory.com/23)
+**NO.2. BERTopic_2는 해당 링크 참고** (https://mz-moonzoo.tistory.com/23)
 <br>
 
 | 토픽 번호    | 문서 수 | 주요 키워드                                 | 주제                                           |
@@ -48,8 +52,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
   
-  **NO.3. BERTopic_3 version은 entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행.**
-<br>➡️ KeyBERT 기반으로 entity_text를 핵심 키워드 중심으로 재구성하고, BERTopic으로 클러스터링
+**NO.3. BERTopic_3**
+<br>entity_text에서 추출한 핵심 키워드를 중심으로 비슷한 것끼리 묶어보는 걸 목표로 실행
+<br>➜ KeyBERT 기반으로 entity_text를 핵심 키워드 중심으로 재구성하고, BERTopic으로 클러스터링
 <br>
 
 | 토픽 번호 | 문서 수 | 주요 키워드                                     | 주제                                  |
@@ -65,9 +70,10 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 7        | 13   | manufacturers, researchers, commercially         | 제조사/연구자 중심의 연구 동향 또는 기술 상용화 문서           |
 
 <br>
-  
-  **NO.4. BERTopic_4 version은 기존 'top_n=3'에서 'top_n=5'로 증가시켜 진행.**
-<br>➡️ 비슷한 개념끼리 더 세분화되게 묶어보는 것을 목표로 실행.
+<br>
+
+**NO.4. BERTopic_4 version은 기존 'top_n=3'에서 'top_n=5'로 증가시켜 진행.**
+<br>➜ 비슷한 개념끼리 더 세분화되게 묶어보는 것을 목표로 실행.
 <br>KeyBERT에서 top_n 파라미터는 각 문서에서 의미적으로 가장 중요한 키워드를 몇 개 추출할지를 설정하는 값
 <br>KeyBERT 기반으로 문장에서 top 5 핵심 키워드를 추출해 문서를 재구성하고, 이를 BERTopic에 입력하여 의미 표현을 확장한 상태에서 클러스터링 수행.
 <br>
@@ -91,10 +97,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
 <br>
-<br>
 
 ## parameter 조절
-<br>
 
 | 파라미터               | 설명                                   | 클러스터 크기/수에 미치는 영향                                              |
 | ---------------------- | ------------------------------------ | ------------------------------------------------------------------- |
@@ -106,7 +110,6 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 <br>
 
-
 | 목표                          | 조정 추천                                                     |
 | ----------------------------- | --------------------------------------------------------- |
 | 더 작은 클러스터도 포착하고 싶다 | `min_cluster_size ↓`, `min_topic_size ↓`, `n_neighbors ↓` |
@@ -116,10 +119,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | 토픽 수가 너무 많다             | `min_topic_size ↑` 또는 `nr_topics="auto"` 유지               |
 <br>
 <br>
-<br>
   
 **NO.1. entity_topics_keybert_FA1**
-<br>➡️ topic의 개수 6개
+<br>topic의 개수 6개
 <br>📌 **NO.2**부터는 'min_cluster_size'를 2로 조정.
 
 | parameter          | size |
@@ -133,7 +135,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
   
 **NO.2. entity_topics_keybert_FA2**
-<br>➡️ topic의 개수 314개
+<br>topic의 개수 314개
 <br>📌 **NO.3**부터는 'min_topic_size'를 2로 조정.
 
 | parameter          | size |
@@ -148,7 +150,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
   
 **NO.3. entity_topics_keybert_FA3**
-<br>➡️ topic의 개수 321개
+<br>topic의 개수 321개
 <br>📌 **NO.4**에서는 'n_neighbors'를 30으로, 'min_topic_size'를 10으로 조정.
 
 | parameter          | size |
@@ -163,7 +165,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
   
 **NO.4. entity_topics_keybert_FA4**
-<br>➡️ topic의 개수 309개
+<br>topic의 개수 309개
 <br>📌 **NO.5**에서는 'n_neighbors'를 50으로, 'min_topic_size'를 20으로 조정.
 
 | parameter          | size |
@@ -178,7 +180,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
   
 **NO.5. entity_topics_keybert_FA5**
-<br>➡️ topic의 개수 312개
+<br>topic의 개수 312개
 <br>📌 **NO.6**에서는 'n_neighbors'를 100으로 조정.
 
 | parameter          | size |
@@ -193,9 +195,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
   
 **NO.6. entity_topics_keybert_FA6**
-<br>➡️ topic의 개수 284개
-<br> 📌1. topic의 갯수는 전과 다르게 줄어듦.
-<br> 📌2. 같은 entity_text인데, 다른 topic으로 표기됨.
+<br>topic의 개수 284개
+<br>📌1. topic의 갯수는 전과 다르게 줄어듦.
+<br>📌2. 같은 entity_text인데, 다른 topic으로 표기됨.
 | entity_text                                                   | topic                                                                      |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | being alone might be a problem when faced with an emergency   | -1_systems_person_elderly_patient <br>4_care_caregivers_general_caregiver  |        
@@ -211,7 +213,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
   
 **NO.7. entity_topics_keybert_FA7**
-<br>➡️ topic의 개수 79개
+<br>topic의 개수 79개
 <br>
 
 | parameter          | size |
@@ -227,20 +229,22 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 ## 코드 수정
 2025-06-23 회의 결과, keyword를 기반으로 진행했던 부분을 제외.
-<br>➡️ entity_text가 바로 클러스터링 될 수 있도록 진행.
+<br>➜ entity_text가 바로 클러스터링 될 수 있도록 진행.
 <br>
 
 **NO.1.**
-- 차원을 100으로 지정하고 진행 (최대 768) ➡️ n_components = 100
+- 차원을 100으로 지정하고 진행 (최대 768) 
+<br> ➜ n_components = 100
+
 - 적어도 Keyword 기반보다 오래 걸릴 것이라고 예상했는데, 2분 미만으로 진행됨.
-<br> ➡️ `FA_entities` 데이터에서, problem의 개수는 3,582개로 양이 적어서 시간이 많이 걸리지 않는 것으로 예상.
+<br> ➜ `FA_entities` 데이터에서, problem의 개수는 3,582개로 양이 적어서 시간이 많이 걸리지 않는 것으로 예상.
 
 - 위에서 언급한 것처럼, 시간이 오래 걸리지 않아 768 차원으로 해도 될 거 같음.
 - 결과 데이터: entity_topic_problem_1, entity_topic_info_problem_1
 <br>
 <br>
 
-**NO.2. parameter 조절**
+**NO.2.**
 - min topic = 1 (최소)
 - min cluster = 2
 - components = 50
@@ -248,7 +252,13 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
 
-**NO.3. parameter 조절**
-- components를 0.1로 진행하면 오류가 남. 정수로 지정해야 해서, 먼저 1로 설정.
-- hdbscan_model에서 metric을 `cosine`으로 사용하려면, `algorithm='generic'`으로 바꾸어야 함.
+**NO.3.**
+- components를 0.1로 진행하면 오류가 남. 정수로만 지정 가능한 듯.
+<br> ➜ 먼저 1로 설정.
 
+- hdbscan_model와 umap_model 모두 `metric="euclidean"`으로 진행.
+<br> ➜ topic 339개(노이즈 -1 포함) 나옴.
+
+- hdbscan_model에서 metric을 `cosine`으로 사용하려면, `algorithm='generic'`으로 바꾸어야 함.
+<br> ➜ 해보았는데 오류 발생. ValueError: Buffer dtype mismatch, expected 'double_t' but got 'float'
+<br> ➜ 타입의 문제인데, 일단 보류.
