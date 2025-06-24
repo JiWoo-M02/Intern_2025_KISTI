@@ -231,20 +231,24 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 
 **NO.1.**
+- 차원을 100으로 지정하고 진행 (최대 768) ➡️ n_components = 100
+- 적어도 Keyword 기반보다 오래 걸릴 것이라고 예상했는데, 2분 미만으로 진행됨.
+<br> ➡️ `FA_entities` 데이터에서, problem의 개수는 3,582개로 양이 적어서 시간이 많이 걸리지 않는 것으로 예상.
 
-결과 데이터: entity_topic_problem_1, entity_topic_info_problem_1
-<br>📌1. 차원을 100으로 지정하고 진행 (최대 768)
-<br>➡️ n_components = 100
-<br>     ➡️ 2번에서 언급한 것처럼, 시간이 오래 걸리지 않아 768 차원으로 해도 될 거 같음.
-<br>📌2. 적어도 Keyword 기반보다 오래 걸릴 것이라고 예상했는데, 왜 2분 미만으로 걸릴까
-<br> ➡️ 현호 선생님께 받은 `FA_entities` 데이터에서, problem의 개수는 3,582개로 양이 적어서 시간이 많이 걸리지 않는 것으로 예상.
+- 위에서 언급한 것처럼, 시간이 오래 걸리지 않아 768 차원으로 해도 될 거 같음.
+- 결과 데이터: entity_topic_problem_1, entity_topic_info_problem_1
 <br>
-<br>📌3. 보여드린 결과 파라미터 조절 
-<br> ➡️ min topic = 1 (최소)
-<br> ➡️ min cluster = 2
-<br> ➡️ components = 50
-<br>결과 데이터: entity_topics_problem_2
 <br>
-<br>components는 정수로 지정해야 함.
-<br>hdbscan_model에서 metric을 `cosine`으로 사용하려면, `algorithm='generic'`으로 바꾸어야 함.
+
+**NO.2. parameter 조절**
+- min topic = 1 (최소)
+- min cluster = 2
+- components = 50
+- 결과 데이터: entity_topic_problem_2, entity_topic_info_problem_2
+<br>
+<br>
+
+**NO.3. parameter 조절**
+- components를 0.1로 진행하면 오류가 남. 정수로 지정해야 해서, 먼저 1로 설정.
+- hdbscan_model에서 metric을 `cosine`으로 사용하려면, `algorithm='generic'`으로 바꾸어야 함.
 
