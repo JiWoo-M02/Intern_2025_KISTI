@@ -1,6 +1,6 @@
 # **BERTopic**
-<br>BERT기반 embeddings + 클래스 기반(class-based) TF-IDF
-<br>➡️ 주제 설명에서 중요한 단어를 유지하면서도 쉽게 해석할 수 있는 조밀한 클러스터를 만드는 토픽 모델링 기술
+BERT기반 embeddings + 클래스 기반(class-based) TF-IDF
+<br>➜ 주제 설명에서 중요한 단어를 유지하면서도 쉽게 해석할 수 있는 조밀한 클러스터를 만드는 토픽 모델링 기술
 <br>
 <br>
 <br>
@@ -9,7 +9,7 @@
 
 # **Objective**
 problem 개체가 대략 10만개 있다고 한다면, 3~5만개 내외로 묶는다고 생각하면 됨.
-BERTopic git은 docs형식이라 국내 블로그나 해외 블로그 참고해서 해보라고 하심.
+<br>BERTopic git은 docs형식이라 국내 블로그나 해외 블로그 참고해서 해보라고 하심.
 <br>
 <br>
 
@@ -254,7 +254,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 **NO.3.**
 - components를 0.1로 진행하면 오류가 남. 정수로만 지정 가능한 듯.
-<br> ➜ 먼저 1로 설정.
+<br> ➜ 1로 설정.
 
 - hdbscan_model와 umap_model 모두 `metric="euclidean"`으로 진행.
 <br> ➜ topic 339개(노이즈 -1 포함) 나옴.
@@ -262,3 +262,5 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 - hdbscan_model에서 metric을 `cosine`으로 사용하려면, `algorithm='generic'`으로 바꾸어야 함.
 <br> ➜ 해보았는데 오류 발생. ValueError: Buffer dtype mismatch, expected 'double_t' but got 'float'
 <br> ➜ 타입의 문제인데, 일단 보류.
+
+- 결과 데이터: entity_topic_problem_3, entity_topic_info_problem_3
