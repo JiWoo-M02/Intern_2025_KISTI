@@ -33,13 +33,12 @@ reduced_docs = df_filtered['entity_text']
 
 # 4. 차원축소 + 클러스터링 모델 정의
 umap_model = umap.UMAP(
-    n_neighbors=100, 
-    n_components=768, 
-    metric="cosine"
+    n_components=1, 
+    metric="euclidean"
     )
 
 hdbscan_model = hdbscan.HDBSCAN(
-    min_cluster_size=5, 
+    min_cluster_size=2, 
     metric="euclidean", 
     cluster_selection_method='eom', 
     prediction_data=True
@@ -47,10 +46,10 @@ hdbscan_model = hdbscan.HDBSCAN(
 
 # 5. BERTopic 모델 생성
 topic_model = BERTopic(
-    embedding_model="all-MiniLM-L6-v2",
+    embedding_model="sentence-transformers/allenai-specter",
     umap_model=umap_model,
     hdbscan_model=hdbscan_model,
-    min_topic_size=20,
+    min_topic_size=1,
     nr_topics="auto",
     verbose=True
 )
@@ -59,16 +58,16 @@ topic_model = BERTopic(
 topics, probs = topic_model.fit_transform(reduced_docs)
 
 # 주제 정보 저장
-num = 9
+num = 4
 topic_info_df = topic_model.get_topic_info()
 topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topic_info_{label_to_process}_{num}.csv", index=False)
 
 # 필터링된 DataFrame에만 결과 저장
 df_filtered['topic'] = topics
-df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topics_keybert_{label_to_process}_{num}.csv", index=False)
+df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topics_{label_to_process}_{num}.csv", index=False)
 
 # 모델 저장
-topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_keybert_model_{label_to_process}_{num}")
+topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_model_{label_to_process}_{num}")
 
 
 # 7. 결과 확인 및 저장
