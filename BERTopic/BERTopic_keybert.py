@@ -64,10 +64,10 @@ topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-inter
 
 # 필터링된 DataFrame에만 결과 저장
 df_filtered['topic'] = topics
-df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topics_{label_to_process}_{num}.csv", index=False)
+df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/EXCEL_FA/entity_topic_{label_to_process}_{num}.csv", index=False)
 
 # 모델 저장
-topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_model_{label_to_process}_{num}")
+# topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/my_model_{label_to_process}_{num}")
 
 
 # 7. 결과 확인 및 저장
