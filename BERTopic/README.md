@@ -264,3 +264,5 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br> ➜ 타입의 문제인데, 일단 보류.
 
 - 결과 데이터: entity_topic_problem_3, entity_topic_info_problem_3
+<br>📌 topic이 중복되는 의미들이 보임.
+<br>    ➜ 분류를 하기 전, topic이 만들어지고 나서 클러스터링 중복 제거 시도.
