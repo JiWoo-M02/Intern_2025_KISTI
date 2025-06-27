@@ -227,7 +227,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
 
-## 코드 수정
+## keyword 제외. BERTopic만.
 2025-06-23 회의 결과, keyword를 기반으로 진행했던 부분을 제외.
 <br>➜ entity_text가 바로 클러스터링 될 수 있도록 진행.
 <br>
@@ -266,3 +266,23 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 - 결과 데이터: entity_topic_problem_3, entity_topic_info_problem_3
 <br>📌 topic이 중복되는 의미들이 보임.
 <br>    ➜ 분류를 하기 전, topic이 만들어지고 나서 클러스터링 중복 제거 시도.
+<br>
+<br>
+
+## 전반적인 코드 수정
+1. 차원 축소하지 않고, 그대로 진행
+- umap_model 말고 SBERT 사용
+- 이전 코드에서는 umap_model을 통한 차원 축소 후, hdbscan_model을 사용하여 클러스터링을 진행함.
+- 수정 코드에서는 SBERT 모델로 임베딩하고, 클러스터링은 동일하게 hdbscan_model으로 진행.
+- 먼저, SBERT 모델 중 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`로 임베딩 진행.
+<br>
+
+2. 중복 제거
+- 모양이 똑같은 것 중복 제거
+- example. 아래와 같이 publication number가 달라도 entity text가 똑같으면 topic이 동일하게 나올 수 있어야 함. 
+- - US09838861 : higher risk of being alone and experiencing an emergency
+- - US09811998 : higher risk of being alone and experiencing an emergency
+- - US09338627 : higher risk of being alone and experiencing an emergency
+
+
+
