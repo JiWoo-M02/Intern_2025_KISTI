@@ -280,9 +280,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 2. 중복 제거
 - 모양이 똑같은 것 중복 제거
 - example. 아래와 같이 publication number가 달라도 entity text가 똑같으면 topic이 동일하게 나올 수 있어야 함. 
-- - US09838861 : higher risk of being alone and experiencing an emergency
-- - US09811998 : higher risk of being alone and experiencing an emergency
-- - US09338627 : higher risk of being alone and experiencing an emergency
+  - US09838861 : higher risk of being alone and experiencing an emergency
+  - US09811998 : higher risk of being alone and experiencing an emergency
+  - US09338627 : higher risk of being alone and experiencing an emergency
 
 
 
