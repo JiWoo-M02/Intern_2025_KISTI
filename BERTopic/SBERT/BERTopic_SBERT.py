@@ -1,40 +1,34 @@
+# %%
 from bertopic import BERTopic
 import pandas as pd
 import hdbscan
 from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-
-# 1. CSV 파일 불러오기
+# === 데이터 불러오기 ===
 file_path = r"C:\Users\MaengJiwoo\.vscode\KISTI-intern\2025_KISTI-intern\BERTopic\FA_entities.csv"
 df = pd.read_csv(file_path, encoding="utf-8")
 
-
-# 2. 원하는 entity_label 필터링
 label_to_process = 'problem'
-#label_to_process = 'solution'
-#label_to_process = 'target'
+# label_to_process = 'solution'
+# label_to_process = 'target'
+
 df_filtered = df[df['entity_label'] == label_to_process].copy()
-
-
-# 3. 중복 없이 unique entity_text만 추출 (클러스터링용)
 unique_texts = df_filtered['entity_text'].drop_duplicates().tolist()
 
-
-# 4. SBERT 임베딩
+# === SBERT ===
 sbert_model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 embeddings = sbert_model.encode(unique_texts, show_progress_bar=True)
 
-
-# 5. HDBSCAN 모델 정의
+# === HDBSCAN ===
 hdbscan_model = hdbscan.HDBSCAN(
-    min_cluster_size=2, 
-    metric="euclidean", 
-    cluster_selection_method='eom', 
+    min_cluster_size=2,
+    metric="euclidean",
+    cluster_selection_method='eom',
     prediction_data=True
 )
 
-
-# 6. BERTopic 모델 정의 및 클러스터링 수행
+# === BERTopic ===
 topic_model = BERTopic(
     embedding_model=None,
     hdbscan_model=hdbscan_model,
@@ -43,30 +37,66 @@ topic_model = BERTopic(
     verbose=True
 )
 topics, probs = topic_model.fit_transform(unique_texts, embeddings)
-
-
-# 7. unique_texts와 topics로 딕셔너리 만들기
 text2topic = dict(zip(unique_texts, topics))
 
-# 8. 원본 df_filtered에서 entity_text 기준 topic 번호 붙이기
+
+# === 토픽 결과를 원본 데이터에 매핑 및 저장 ===
+num = 2  # 파일 넘버
 df_filtered['topic'] = df_filtered['entity_text'].map(text2topic)
+df_filtered.to_csv(
+    f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_{label_to_process}_{num}.csv",
+    index=False
+)
 
+# === 토픽 정보 집계 및 저장 ===
+topic_info_df = topic_model.get_topic_info().set_index('Topic')
+topic_counts = df_filtered['topic'].value_counts().sort_index()
+topic_info_df['Count'] = topic_counts
+topic_info_df['Count'] = topic_info_df['Count'].fillna(0).astype(int)
+topic_info_df = topic_info_df.reset_index()
 
-# 9. 결과 저장/확인
-num = 1
-topic_info_df = topic_model.get_topic_info()
-topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_info_{label_to_process}_{num}.csv", index=False)
-
-# 필터링된 DataFrame에만 결과 저장
-df_filtered['topic'] = df_filtered['entity_text'].map(text2topic)
-df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_{label_to_process}_{num}.csv", index=False)
-
+topic_info_df.to_csv(
+    f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_info_{label_to_process}_{num}.csv",
+    index=False
+)
 
 # 모델 저장
-# topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/my_model_{label_to_process}_{num}")
-
+topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/my_model_{label_to_process}_{num}")
 
 # 결과 출력
-print(topic_model.get_topic_info())
-pd.set_option('display.max_rows', None)
-print(df_filtered.head(20))  # 일부 결과 미리 보기
+print(topic_info_df)
+
+# === 토픽별 대표 키워드 추출(TF-IDF) 및 저장 ===
+num_keywords = 5
+tfidf_results = []
+
+for topic_num in sorted(df_filtered['topic'].unique()):
+    if topic_num == -1:
+        continue  # outlier 건너뜀
+    topic_texts = df_filtered[df_filtered['topic'] == topic_num]['entity_text'].tolist()
+    if not topic_texts:
+        continue
+    vectorizer = TfidfVectorizer(
+        max_features=num_keywords,
+        stop_words='english'  # 한글일 경우 stop_words 적용X
+    )
+    X = vectorizer.fit_transform(topic_texts)
+    keywords = vectorizer.get_feature_names_out()
+    tfidf_results.append({
+        'topic': topic_num,
+        'keywords': ', '.join(keywords),
+        'count': len(topic_texts)
+    })
+
+df_tfidf_keywords = pd.DataFrame(tfidf_results)
+df_tfidf_keywords = df_tfidf_keywords.sort_values(by='topic').reset_index(drop=True)
+
+tfidf_save_path = f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_keywords_tfidf_{label_to_process}_{num}.csv"
+df_tfidf_keywords.to_csv(tfidf_save_path, index=False)
+
+print("\n[TF-IDF 기반 토픽별 대표 키워드]")
+print(df_tfidf_keywords)
+
+# %%
+topic_model.visualize_barchart()
+

@@ -270,6 +270,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 
 ## 전반적인 코드 수정
+### **Objective**
 1. 차원 축소하지 않고, 그대로 진행
 - umap_model 말고 SBERT 사용
 - 이전 코드에서는 umap_model을 통한 차원 축소 후, hdbscan_model을 사용하여 클러스터링을 진행함.
@@ -279,10 +280,18 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 2. 중복 제거
 - 모양이 똑같은 것 중복 제거
+<br> ➜ +1. 임베딩 전, 완전히 동일한 문장(중복 문장)을 **하나만 남기고** 제거. 
+<br> ➜ +2. 토핑이 끝난 후, 할당된 토픽 번호를 다시 중복 포함 원본 데이터에 매핑.
+<br> ➜ +3. 모든 텍스트(중복 포함)의 토픽 정보 저장.
+
 - 아래와 같이 publication number가 달라도 entity text가 똑같으면 topic이 동일하게 나올 수 있어야 함. 
   - US09838861 : higher risk of being alone and experiencing an emergency
   - US09811998 : higher risk of being alone and experiencing an emergency
   - US09338627 : higher risk of being alone and experiencing an emergency
+
+
+
+walking impediment due to weakened muscle resulting from aging
 
 
 
