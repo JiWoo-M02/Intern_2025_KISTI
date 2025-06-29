@@ -66,20 +66,24 @@ topic_model.save(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BE
 # 결과 출력
 print(topic_info_df)
 
-# === 토픽별 대표 키워드 추출(TF-IDF) 및 저장 ===
+# %%
+# --- BERTopic과는 별개로, HDBSCAN 결과만으로 키워드 추출 ---
+cluster_labels = hdbscan_model.fit_predict(embeddings)
+df_cluster = pd.DataFrame({
+    'entity_text': unique_texts,
+    'topic': cluster_labels
+})
+
 num_keywords = 5
 tfidf_results = []
 
-for topic_num in sorted(df_filtered['topic'].unique()):
+for topic_num in sorted(df_cluster['topic'].unique()):
     if topic_num == -1:
-        continue  # outlier 건너뜀
-    topic_texts = df_filtered[df_filtered['topic'] == topic_num]['entity_text'].tolist()
+        continue
+    topic_texts = df_cluster[df_cluster['topic'] == topic_num]['entity_text'].tolist()
     if not topic_texts:
         continue
-    vectorizer = TfidfVectorizer(
-        max_features=num_keywords,
-        stop_words='english'  # 한글일 경우 stop_words 적용X
-    )
+    vectorizer = TfidfVectorizer(max_features=num_keywords, stop_words='english')
     X = vectorizer.fit_transform(topic_texts)
     keywords = vectorizer.get_feature_names_out()
     tfidf_results.append({
@@ -90,11 +94,9 @@ for topic_num in sorted(df_filtered['topic'].unique()):
 
 df_tfidf_keywords = pd.DataFrame(tfidf_results)
 df_tfidf_keywords = df_tfidf_keywords.sort_values(by='topic').reset_index(drop=True)
-
-tfidf_save_path = f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_keywords_tfidf_{label_to_process}_{num}.csv"
+tfidf_save_path = f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_keywords_tfidf_{label_to_process}_{num}_hdbscan_only.csv"
 df_tfidf_keywords.to_csv(tfidf_save_path, index=False)
-
-print("\n[TF-IDF 기반 토픽별 대표 키워드]")
+print("\n[HDBSCAN-only TF-IDF 기반 토픽별 대표 키워드]")
 print(df_tfidf_keywords)
 
 # %%

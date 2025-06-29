@@ -281,16 +281,61 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 2. 중복 제거
 - 모양이 똑같은 것 중복 제거
-  + 1. 임베딩 전, 완전히 동일한 문장(중복 문장)을 **하나만 남기고** 제거. 
-  + 2. 토핑이 끝난 후, 할당된 토픽 번호를 다시 중복 포함 원본 데이터에 매핑.
-  + 3. 모든 텍스트(중복 포함)의 토픽 정보 저장.
+- 1. 임베딩 전, 완전히 동일한 문장(중복 문장)을 **하나만 남기고** 제거. 
+- 2. 토핑이 끝난 후, 할당된 토픽 번호를 다시 중복 포함 원본 데이터에 매핑.
+- 3. 모든 텍스트(중복 포함)의 토픽 정보 저장.
 
 - 아래와 같이 publication number가 달라도 entity text가 똑같으면 topic이 동일하게 나올 수 있어야 함. 
-  ➜ US09838861 : higher risk of being alone and experiencing an emergency
-  ➜ US09811998 : higher risk of being alone and experiencing an emergency
-  ➜ US09338627 : higher risk of being alone and experiencing an emergency
+<br>  ➜ US09838861 : higher risk of being alone and experiencing an emergency
+<br>  ➜ US09811998 : higher risk of being alone and experiencing an emergency
+<br>  ➜ US09338627 : higher risk of being alone and experiencing an emergency
+<br>
+<br>
+
+### **Flow**
+1. 데이터 불러오기
+- CSV 파일에서 데이터를 읽어옴.
+- 원하는 entity_label만 필터링.
+<br>
+
+2. 임베딩(SBERT(Sentence-BERT) 사용)
+- 중복 제거된 entity_text만 추출.
+<br>
+
+3. 클러스터링(HDBSCAN 사용)
+- 이 클러스터링을 BERTopic 프레임워크 내부에서 사용함.
+<br>
+
+4. BERTopic으로 토픽 할당
+- entity_text 데이터에 topic 할당
+ ➜ 주제별 대표 단어 추출 기능을 제공하는 라이브러리.
+- 임베딩+클러스터링 결과를 활용해 각 문장에 토픽을 부여.
+<br>
+
+5. 결과 저장
+- topic 분류된 것과 topic info 내용 저장
+- topic info 항목 설명
+- - Topic : 토픽(군집) 번호
+- - Count : 각 토픽에 포함된 문장 개수
+- - Name : 토픽 이름 (대표 단어 등으로 자동 생성)
+- - Representation : 토픽의 주요 키워드(대표 단어)
+- - Representative_Docs : 토픽을 잘 보여주는 실제 예시 문장
+<br>
+<br>
+
+### **ETC**
+1. HDBSCAN 단독 사용 (임베딩 + HDBSCAN + TF-IDF)
+- SBERT로 텍스트 임베딩을 수행한 뒤, HDBSCAN으로 클러스터링을 직접 진행
+- 각 문장에 군집(label)을 할당하고, 각 군집별로 TF-IDF를 이용해 대표 키워드를 추출
+- 전체 3,582개 중 2,608개가 노이즈(-1)로 분류되어, 실제로 토픽으로 분류되는 데이터가 적음
+
+2. BERTopic
+- 외부에서 미리 계산한 SBERT 임베딩을 입력받아, BERTopic에서 HDBSCAN 클러스터링과 토픽 수 자동 조정, 대표 키워드, 대표 문장 추출까지 한 번에 처리
+- 토픽별로 대표 키워드와 대표 문장 등 다양한 분석 결과를 함께 제공
+- 노이즈로 분류되는 데이터가 상대적으로 적고, 더 많은 텍스트가 의미 있는 토픽에 할당됨
 
 
+### **이전과의 결과 비교**
 
 walking impediment due to weakened muscle resulting from aging
 
