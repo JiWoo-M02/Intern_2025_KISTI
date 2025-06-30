@@ -292,7 +292,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 <br>
 <br>
 
-### **Flow**
+### **Process**
 1. 데이터 불러오기
 - CSV 파일에서 데이터를 읽어옴.
 - 원하는 entity_label만 필터링.
@@ -304,11 +304,14 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 3. 클러스터링(HDBSCAN 사용)
 - 이 클러스터링을 BERTopic 프레임워크 내부에서 사용함.
+    ➜ 클러스터 label 결과만 따로 계산해서 BERTopic에 넘기는 것은 불가능.
+    ➜ 즉, BERTopic 내부에서 hdbscan_model을 fit하는 과정을 거치지 않고 label만 주는 방식은 없음.
+    ➜ BERTopic을 쓴 이유: 각 토픽별로 Name(토픽 이름), Representation(대표 단어), Representative_Docs(토픽을 잘 보여주는 실제 예시 문장)와 같이 요약을 해주기 때문.
 <br>
 
 4. BERTopic으로 토픽 할당
 - entity_text 데이터에 topic 할당
- ➜ 주제별 대표 단어 추출 기능을 제공하는 라이브러리.
+    ➜ 주제별 대표 단어 추출 기능을 제공하는 라이브러리.
 - 임베딩+클러스터링 결과를 활용해 각 문장에 토픽을 부여.
 <br>
 
@@ -325,17 +328,31 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 ### **ETC**
 1. HDBSCAN 단독 사용 (임베딩 + HDBSCAN + TF-IDF)
-- SBERT로 텍스트 임베딩을 수행한 뒤, HDBSCAN으로 클러스터링을 직접 진행
-- 각 문장에 군집(label)을 할당하고, 각 군집별로 TF-IDF를 이용해 대표 키워드를 추출
-- 전체 3,582개 중 2,608개가 노이즈(-1)로 분류되어, 실제로 토픽으로 분류되는 데이터가 적음
+- SBERT로 텍스트 임베딩을 수행한 뒤, HDBSCAN으로 클러스터링을 직접 진행.
+- 각 문장에 군집(label)을 할당하고, 각 군집별로 TF-IDF를 이용해 대표 키워드를 추출.
+- 전체 3,582개 中 2,608개의 노이즈.
+- 노이즈(-1) 제외 총 220개의 topic 추출.
+- 실제로 토픽으로 분류되는 데이터가 적음.
+- 결과 데이터: (전체결과_problem sheet 中) entity_topic_info_problem_3_tf, entity_topic_problem_3_tf
 
 2. BERTopic
-- 외부에서 미리 계산한 SBERT 임베딩을 입력받아, BERTopic에서 HDBSCAN 클러스터링과 토픽 수 자동 조정, 대표 키워드, 대표 문장 추출까지 한 번에 처리
-- 토픽별로 대표 키워드와 대표 문장 등 다양한 분석 결과를 함께 제공
-- 노이즈로 분류되는 데이터가 상대적으로 적고, 더 많은 텍스트가 의미 있는 토픽에 할당됨
-
+- 외부에서 미리 계산한 SBERT 임베딩을 입력받아, BERTopic에서 HDBSCAN 클러스터링과 토픽 수 자동 조정, 대표 키워드, 대표 문장 추출까지 한 번에 처리.
+- 토픽별로 대표 키워드와 대표 문장 등 다양한 분석 결과를 함께 제공.
+- 전체 3,582개 中 623개의 노이즈.
+- 노이즈(-1) 제외 총 180개의 topic 추출.
+- 결과 데이터: (전체결과_problem sheet 中) entity_topic_info_problem_1, entity_topic_problem_1
+<br>
+<br>
 
 ### **이전과의 결과 비교**
+
+| entity_text         | 기존.ver 결과                            | 수정.ver 결과                                      |
+| ------------------- | --------------------------------------- | -------------------------------------------------- |
+| embarrassing        | 20_themselves_living_individuals_alone  | 25_discomfort_psychologically_distress_traumatic   |
+| humiliating         | 20_themselves_living_individuals_alone  | 44_violence_domestic_assault_abuse                 |
+| physical discomfort | 20_themselves_living_individuals_alone  | 138_ulcers_pressure_sores_painful                  |
+
+
 
 walking impediment due to weakened muscle resulting from aging
 
