@@ -304,13 +304,13 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 3. 클러스터링(HDBSCAN 사용)
 - 이 클러스터링을 BERTopic 프레임워크 내부에서 사용함.
-    ➜ 클러스터 label 결과만 따로 계산해서 BERTopic에 넘기는 것은 불가능.
-    ➜ 즉, BERTopic 내부에서 hdbscan_model을 fit하는 과정을 거치지 않고 label만 주는 방식은 없음.
-    ➜ BERTopic을 쓴 이유: 각 토픽별로 Name(토픽 이름), Representation(대표 단어), Representative_Docs(토픽을 잘 보여주는 실제 예시 문장)와 같이 요약을 해주기 때문.
+<br>➜ 클러스터 label 결과만 따로 계산해서 BERTopic에 넘기는 것은 불가능.
+<br>➜ 즉, BERTopic 내부에서 hdbscan_model을 fit하는 과정을 거치지 않고 label만 주는 방식은 없음.
+<br>➜ BERTopic을 쓴 이유: 각 토픽별로 Name(토픽 이름), Representation(대표 단어), Representative_Docs(토픽을 잘 보여주는 실제 예시 문장)와 같이 요약을 해주기 때문.
 <br>
 
 4. BERTopic으로 토픽 할당
-- entity_text 데이터에 topic 할당
+- entity_text 데이터에 topic 할당<br/>    
     ➜ 주제별 대표 단어 추출 기능을 제공하는 라이브러리.
 - 임베딩+클러스터링 결과를 활용해 각 문장에 토픽을 부여.
 <br>
@@ -318,11 +318,11 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 5. 결과 저장
 - topic 분류된 것과 topic info 내용 저장
 - topic info 항목 설명
-- - Topic : 토픽(군집) 번호
-- - Count : 각 토픽에 포함된 문장 개수
-- - Name : 토픽 이름 (대표 단어 등으로 자동 생성)
-- - Representation : 토픽의 주요 키워드(대표 단어)
-- - Representative_Docs : 토픽을 잘 보여주는 실제 예시 문장
+    - Topic : 토픽(군집) 번호
+    - Count : 각 토픽에 포함된 문장 개수
+    - Name : 토픽 이름 (대표 단어 등으로 자동 생성)
+    - Representation : 토픽의 주요 키워드(대표 단어)
+    - Representative_Docs : 토픽을 잘 보여주는 실제 예시 문장
 <br>
 <br>
 
