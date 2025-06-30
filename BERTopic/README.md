@@ -282,8 +282,8 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 2. 중복 제거
 - 모양이 똑같은 것 중복 제거
     1. 임베딩 전, 완전히 동일한 문장(중복 문장)을 **하나만 남기고** 제거. 
-* 2. 토핑이 끝난 후, 할당된 토픽 번호를 다시 중복 포함 원본 데이터에 매핑.
-+ 3. 모든 텍스트(중복 포함)의 토픽 정보 저장.
+    2. 토핑이 끝난 후, 할당된 토픽 번호를 다시 중복 포함 원본 데이터에 매핑.
+    3. 모든 텍스트(중복 포함)의 토픽 정보 저장.
 
 - 아래와 같이 publication number가 달라도 entity text가 똑같으면 topic이 동일하게 나올 수 있어야 함. 
 <br>  ➜ US09838861 : higher risk of being alone and experiencing an emergency
@@ -294,8 +294,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 ### **Process**
 1. 데이터 불러오기
-- CSV 파일에서 데이터를 읽어옴.
-- 원하는 entity_label만 필터링.
+- CSV 파일에서 데이터에서, 원하는 entity_label만 필터링.
 <br>
 
 2. 임베딩(SBERT(Sentence-BERT) 사용)
@@ -346,15 +345,12 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 
 ### **이전과의 결과 비교**
 
-| entity_text         | 기존.ver 결과                            | 수정.ver 결과                                      |
+| entity_text         | 기존.ver                                 | 수정.ver                                           |
 | ------------------- | --------------------------------------- | -------------------------------------------------- |
 | embarrassing        | 20_themselves_living_individuals_alone  | 25_discomfort_psychologically_distress_traumatic   |
 | humiliating         | 20_themselves_living_individuals_alone  | 44_violence_domestic_assault_abuse                 |
 | physical discomfort | 20_themselves_living_individuals_alone  | 138_ulcers_pressure_sores_painful                  |
-
-
-
-walking impediment due to weakened muscle resulting from aging
-
-
-
+| ------------------- | --------------------------------------- | -------------------------------------------------- |
+| walking impediment due to injury                               | 265_impediment_instrument_fatal_ridden | 15_walking_impediment_walk_difficulty |
+| walking impediment due to disease                              | 263_erect_impediment_rise_lift         | 15_walking_impediment_walk_difficulty |
+| walking impediment due to weakened muscle resulting from aging | -1                                     | -1                                    |
