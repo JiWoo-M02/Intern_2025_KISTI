@@ -312,6 +312,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 - entity_text 데이터에 topic 할당<br/>    
     ➜ 주제별 대표 단어 추출 기능을 제공하는 라이브러리.
 - 임베딩+클러스터링 결과를 활용해 각 문장에 토픽을 부여.
+- BERTopic은 주제별 대표 단어 추출 기능을 포함하며, 각 문장(엔티티)에 대한 토픽 분류와 함께 토픽별 대표 단어와 예시 문장 정보를 함께 제공한다.
 <br>
 
 5. 결과 저장
@@ -340,6 +341,7 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 - 전체 3,582개 中 623개의 노이즈.
 - 노이즈(-1) 제외 총 180개의 topic 추출.
 - 결과 데이터: (전체결과_problem sheet 中) entity_topic_info_problem_1, entity_topic_problem_1
+
 <br>
 <br>
 
@@ -350,7 +352,9 @@ NO.1. BERTopic_1은 git에서 Quick Start 참고하여 돌려본 것.
 | embarrassing        | 20_themselves_living_individuals_alone  | 25_discomfort_psychologically_distress_traumatic   |
 | humiliating         | 20_themselves_living_individuals_alone  | 44_violence_domestic_assault_abuse                 |
 | physical discomfort | 20_themselves_living_individuals_alone  | 138_ulcers_pressure_sores_painful                  |
-| ------------------- | --------------------------------------- | -------------------------------------------------- |
+| ------------------------------------------------------------------------------------------------------------ |
 | walking impediment due to injury                               | 265_impediment_instrument_fatal_ridden | 15_walking_impediment_walk_difficulty |
 | walking impediment due to disease                              | 263_erect_impediment_rise_lift         | 15_walking_impediment_walk_difficulty |
 | walking impediment due to weakened muscle resulting from aging | -1                                     | -1                                    |
+
+

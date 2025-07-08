@@ -18,7 +18,7 @@ unique_texts = df_filtered['entity_text'].drop_duplicates().tolist()
 
 # SBERT 임베딩
 sbert_model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
-embeddings = sbert_model.encode(unique_texts, show_progress_bar=True)
+#embeddings = sbert_model.encode(unique_texts, show_progress_bar=True)
 
 # HDBSCAN 모델 정의
 hdbscan_model = hdbscan.HDBSCAN(
@@ -30,13 +30,14 @@ hdbscan_model = hdbscan.HDBSCAN(
 
 # BERTopic 모델 정의 및 클러스터링 수행
 topic_model = BERTopic(
-    embedding_model=None,
+    embedding_model=sbert_model,
     hdbscan_model=hdbscan_model,
     min_topic_size=1,
     nr_topics="auto",
     verbose=True
 )
-topics, probs = topic_model.fit_transform(unique_texts, embeddings)
+#topics, probs = topic_model.fit_transform(unique_texts, embeddings)
+topics, probs = topic_model.fit_transform(unique_texts)
 
 # unique_texts와 topics로 딕셔너리 만들기
 text2topic = dict(zip(unique_texts, topics))
@@ -46,7 +47,7 @@ num = 1
 
 # 원본 df_filtered에서 entity_text 기준 topic 번호 붙이기
 df_filtered['topic'] = df_filtered['entity_text'].map(text2topic)
-df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_{label_to_process}_{num}.csv", index=False)
+df_filtered.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/topic_{label_to_process}_{num}.csv", index=False)
 
 
 # 기존 BERTopic info 불러오기 (unique_texts 기준)
@@ -61,7 +62,7 @@ topic_info_df['Count'] = topic_info_df['Count'].fillna(0).astype(int)
 topic_info_df = topic_info_df.reset_index()
 
 # 저장
-topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/entity_topic_info_{label_to_process}_{num}.csv", index=False)
+topic_info_df.to_csv(f"C:/Users/MaengJiwoo/.vscode/KISTI-intern/2025_KISTI-intern/BERTopic/SBERT/topic_info_{label_to_process}_{num}.csv", index=False)
 
 
 # 모델 저장
